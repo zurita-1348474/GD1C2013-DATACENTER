@@ -2,9 +2,8 @@ Use [GD1C2013]    /* Utilizamos una base de datos EXTERNA,la base a la cual se d
 Go 
 /* Signo de finalización de lotes de sentencia*/
 
-Create Schema DATACENTER AUTHORIZATION [gd]   /* Creamos un Schema nuevo(Modelo de Datos/contiene Tablas,Indices y demas estructuras de negocio) ; El usuario que poseerá el schema (OWNER) sera: GD*/
-Go								    
-
+Create Schema DATACENTER AUTHORIZATION [gd]   /* Creamos un Schema nuevo(Modelo de Datos/contiene Tablas,Indices y demas estructuras de negocio) ; El usuario que poseerá el schema (OWNER) sera: GD*/   
+Go
 /*------------------INICIO DE CREACION DE TABLAS--------------------*/
 /*------------------------------------------------------------------*/
 
@@ -22,11 +21,13 @@ GO
 /*------------------------------------------------------------------*/
 
 CREATE TABLE DATACENTER.Paquete
-(Paquete_Codigo numeric(18,0) PRIMARY KEY NOT NULL,
-Paquete_Cli_DNI numeric(18,0) NOT NULL references DATACENTER.Cliente (Cli_Dni),
+(Paquete_Codigo numeric(18,0) NOT NULL,
+Paquete_Cli_DNI numeric(18,0) NOT NULL,
 Paquete_Precio numeric(18,2) NULL,
 Paquete_KG numeric(18,0) NULL,
-Paquete_FechaCompra datetime NULL)
+Paquete_FechaCompra datetime NULL,
+	PRIMARY KEY (Paquete_Codigo),
+	FOREIGN KEY (Paquete_Cli_DNI) references DATACENTER.Cliente (Cli_Dni))
 GO
 
 
@@ -46,23 +47,16 @@ GO
 /*------------------------------------------------------------------*/
 
 CREATE TABLE DATACENTER.Pasaje
-(Pasaje_Codigo numeric(18,0) PRIMARY KEY NOT NULL,
-Pasaje_Cli_DNI numeric(18,0) NOT NULL references DATACENTER.Cliente (Cli_Dni),
-Pasaje_Recorrido_Codigo numeric(18,0) NOT NULL references DATACENTER.Recorrido (Recorrido_Codigo),
+(Pasaje_Codigo numeric(18,0) NOT NULL,
+Pasaje_Cli_DNI numeric(18,0) NOT NULL,
+Pasaje_Recorrido_Codigo numeric(18,0) NOT NULL,
 Pasaje_Precio numeric(18,0) NULL,
-Pasaje_Fecha_Compra datetime NULL)
+Pasaje_Fecha_Compra datetime NULL,
+	PRIMARY KEY(Pasaje_Codigo),
+	FOREIGN KEY (Pasaje_Cli_DNI) references DATACENTER.Cliente (Cli_Dni),
+	FOREIGN KEY (Pasaje_Recorrido_Codigo) references DATACENTER.Recorrido (Recorrido_Codigo))
 GO
 
-/*------------------------------------------------------------------*/
-/*------------------------------------------------------------------*/
-
-CREATE TABLE DATACENTER.Viaje
-(Viaje_Recorrido_Codigo numeric(18,0) PRIMARY KEY NOT NULL references DATACENTER.Recorrido (Recorrido_Codigo),
-/*Viaje_Micro_Patente nvarchar(255) PRIMARY KEY NOT NULL references Micro (Micro_Patente), FALTA DEFINIR UNA PK COMPUESTA*/
-FechaSalida datetime NULL,
-Fecha_Llegada_Estimada datetime NULL,
-Fecha_Llegada datetime NULL)
-GO
 
 /*------------------------------------------------------------------*/
 /*------------------------------------------------------------------*/
@@ -78,10 +72,28 @@ GO
 /*------------------------------------------------------------------*/
 /*------------------------------------------------------------------*/
 
+CREATE TABLE DATACENTER.Viaje
+(Viaje_Recorrido_Codigo numeric(18,0) NOT NULL,
+Viaje_Micro_Patente nvarchar(255) NOT NULL,
+FechaSalida datetime NULL,
+Fecha_Llegada_Estimada datetime NULL,
+Fecha_Llegada datetime NULL,
+	PRIMARY KEY (Viaje_Recorrido_Codigo, Viaje_Micro_Patente),
+	FOREIGN KEY (Viaje_Recorrido_Codigo) references DATACENTER.Recorrido (Recorrido_Codigo),
+	FOREIGN KEY (Viaje_Micro_Patente) references DATACENTER.Micro (Micro_Patente))
+GO
+
+/*------------------------------------------------------------------*/
+/*------------------------------------------------------------------*/
+
+
 CREATE TABLE DATACENTER.Butaca
-(Butaca_Nro numeric(18,0) PRIMARY KEY NOT NULL,
+(Butaca_Nro numeric(18,0) NOT NULL,
+Butaca_Micro_Patente nvarchar(255) NOT NULL,
 Butaca_Tipo nvarchar(255) NULL,
-Butaca_Piso numeric(18,0) NULL)
+Butaca_Piso numeric(18,0) NULL,
+PRIMARY KEY (Butaca_Nro, Butaca_Micro_Patente),
+FOREIGN KEY (Butaca_Micro_Patente) references DATACENTER.Micro (Micro_Patente))
 GO
 
 /*------------------------------------------------------------------*/
