@@ -7,96 +7,127 @@ Go
 /*------------------INICIO DE CREACION DE TABLAS--------------------*/
 /*------------------------------------------------------------------*/
 
+CREATE TABLE DATACENTER.Funcionalidad
+(func_Id int IDENTITY (1,1) PRIMARY KEY NOT NULL,
+func_Nombre nvarchar(255) NOT NULL)
+GO
+
+/*------------------------------------------------------------------*/
+/*------------------------------------------------------------------*/
+
+CREATE TABLE DATACENTER.Rol
+(rol_Id int IDENTITY (1,1) PRIMARY KEY NOT NULL,
+rol_Nombre nvarchar(255) NOT NULL,
+rol_Estado char NOT NULL)
+GO
+
+/*------------------------------------------------------------------*/
+/*------------------------------------------------------------------*/
+
+CREATE TABLE DATACENTER.FuncionalidadPorRol
+(fxrol_rol_Id int NOT NULL, 
+fxrol_func_Id int NOT NULL, 
+fxrol_Estado char NOT NULL,
+FOREIGN KEY(fxrol_rol_Id) references DATACENTER.Rol (rol_Id),
+FOREIGN KEY(fxrol_func_Id) references DATACENTER.Funcionalidad (func_Id),
+PRIMARY KEY (fxrol_rol_Id, fxrol_func_Id)
+)
+GO
+
+--------------DUDOSOO-----------------------
+/*
+CREATE TABLE DATACENTER.Usuario
+(usu_Id int IDENTITY (1,1) PRIMARY KEY NOT NULL,
+usu_Rol_Id int NOT NULL,
+FOREIGN KEY (usu_Rol_Id) references DATACENTER.Rol (rol_Id) 
+)
+*/
+
+/*------------------------------------------------------------------*/
+/*-----------------CREAMOS TABLA ADMINISTRADOR----------------------*/
+
+CREATE TABLE DATACENTER.Administrador
+(adm_Username nvarchar(255) NOT NULL,
+adm_password nvarchar(255) NOT NULL, --FALTA CIFRADO DE CLAVE
+adm_cant_intentos int NOT NULL, 
+adm_rol_Id int NOT NULL, 
+PRIMARY KEY (adm_username),
+FOREIGN KEY (adm_rol_ID) REFERENCES DATACENTER.Rol (rol_Id))
+GO
+
+/*------------------------------------------------------------------*/
+/*-----------------CREAMOS TABLA CLIENTE----------------------------*/
+
 CREATE TABLE DATACENTER.Cliente
-(Cli_Dni numeric(18,0) PRIMARY KEY NOT NULL,
-Cli_Nombre nvarchar(255) NULL,
-Cli_Apellido nvarchar(255) NULL,
-Cli_Dir nvarchar(255) NULL,
-Cli_Telefono numeric(18,0) NULL,
-Cli_Mail nvarchar(255) NULL,
-Cli_Fecha_Nac datetime NULL)
+(cli_Dni numeric(18,0) NOT NULL,
+cli_rol_Id int NOT NULL,
+cli_Nombre nvarchar(255) NULL,
+cli_Apellido nvarchar(255) NULL,
+cli_Dir nvarchar(255) NULL,
+cli_Telefono nvarchar(255) NULL,
+cli_Mail nvarchar(255) NULL, 
+Cli_Fecha_Nac datetime NULL,
+Cli_puntos_Acum int NULL,
+Cli_Condicion char NULL,
+Cli_Sexo char NULL,
+FOREIGN KEY (cli_rol_Id) REFERENCES DATACENTER.Rol (rol_Id),
+PRIMARY KEY (cli_Dni))
 GO
 
-/*------------------------------------------------------------------*/
-/*------------------------------------------------------------------*/
+/* ---------------------PRUEBAS-------------------------- */
 
-CREATE TABLE DATACENTER.Paquete
-(Paquete_Codigo numeric(18,0) NOT NULL,
-Paquete_Cli_DNI numeric(18,0) NOT NULL,
-Paquete_Precio numeric(18,2) NULL,
-Paquete_KG numeric(18,0) NULL,
-Paquete_FechaCompra datetime NULL,
-	PRIMARY KEY (Paquete_Codigo),
-	FOREIGN KEY (Paquete_Cli_DNI) references DATACENTER.Cliente (Cli_Dni))
+--AGREGAMOS FUNCIONALIDADES 
+INSERT INTO DATACENTER.Funcionalidad(func_Nombre) --no ponemos ID ya que se autoincrementa
+VALUES ('Comprar')
 GO
 
-
-/*------------------------------------------------------------------*/
-/*------------------------------------------------------------------*/
-
-CREATE TABLE DATACENTER.Recorrido
-(Recorrido_Codigo numeric(18,0) PRIMARY KEY NOT NULL,
-Recorrido_Precio_BaseKG numeric(18,2) NULL,
-Recorrido_Precio_BasePasaje numeric(18,2) NULL,
-Recorrido_Ciudad_Origen nvarchar(255) NULL,
-Recorrido_Ciudad_Destino nvarchar(255) NULL)
+INSERT INTO DATACENTER.Funcionalidad(func_Nombre) --no ponemos ID ya que se autoincrementa
+VALUES ('ABM Recorrido')
 GO
 
-
-/*------------------------------------------------------------------*/
-/*------------------------------------------------------------------*/
-
-CREATE TABLE DATACENTER.Pasaje
-(Pasaje_Codigo numeric(18,0) NOT NULL,
-Pasaje_Cli_DNI numeric(18,0) NOT NULL,
-Pasaje_Recorrido_Codigo numeric(18,0) NOT NULL,
-Pasaje_Precio numeric(18,0) NULL,
-Pasaje_Fecha_Compra datetime NULL,
-	PRIMARY KEY(Pasaje_Codigo),
-	FOREIGN KEY (Pasaje_Cli_DNI) references DATACENTER.Cliente (Cli_Dni),
-	FOREIGN KEY (Pasaje_Recorrido_Codigo) references DATACENTER.Recorrido (Recorrido_Codigo))
+INSERT INTO DATACENTER.Funcionalidad(func_Nombre) --no ponemos ID ya que se autoincrementa
+VALUES ('ABM Micro')
 GO
 
+--AGREGAMOS ROLES
 
-/*------------------------------------------------------------------*/
-/*------------------------------------------------------------------*/
-
-CREATE TABLE DATACENTER.Micro
-(Micro_Patente nvarchar(255) PRIMARY KEY NOT NULL,
-Micro_Modelo nvarchar(255) NULL,
-Micro_KG_Disponibles numeric(18,0) NULL,
-Micro_Marca nvarchar(255) NULL,
-Tipo_Servicio nvarchar(255) NULL)
+INSERT INTO DATACENTER.Rol(rol_Nombre, rol_Estado) --no ponemos ID ya que se autoincrementa
+VALUES ('Administrador', 'T')
 GO
 
-/*------------------------------------------------------------------*/
-/*------------------------------------------------------------------*/
-
-CREATE TABLE DATACENTER.Viaje
-(Viaje_Recorrido_Codigo numeric(18,0) NOT NULL,
-Viaje_Micro_Patente nvarchar(255) NOT NULL,
-FechaSalida datetime NULL,
-Fecha_Llegada_Estimada datetime NULL,
-Fecha_Llegada datetime NULL,
-	PRIMARY KEY (Viaje_Recorrido_Codigo, Viaje_Micro_Patente),
-	FOREIGN KEY (Viaje_Recorrido_Codigo) references DATACENTER.Recorrido (Recorrido_Codigo),
-	FOREIGN KEY (Viaje_Micro_Patente) references DATACENTER.Micro (Micro_Patente))
+INSERT INTO DATACENTER.Rol(rol_Nombre, rol_Estado) --no ponemos ID ya que se autoincrementa
+VALUES ('Cliente', 'F')
 GO
 
-/*------------------------------------------------------------------*/
-/*------------------------------------------------------------------*/
+--ASOCIAMOS ROLES CON FUNCIONES
 
-
-CREATE TABLE DATACENTER.Butaca
-(Butaca_Nro numeric(18,0) NOT NULL,
-Butaca_Micro_Patente nvarchar(255) NOT NULL,
-Butaca_Tipo nvarchar(255) NULL,
-Butaca_Piso numeric(18,0) NULL,
-PRIMARY KEY (Butaca_Nro, Butaca_Micro_Patente),
-FOREIGN KEY (Butaca_Micro_Patente) references DATACENTER.Micro (Micro_Patente))
+INSERT INTO DATACENTER.FuncionalidadPorRol(fxrol_rol_Id,fxrol_func_Id, fxrol_Estado)
+VALUES (1, 1, 'H') --H HABILITADO D DESHABILITADO
 GO
 
-/*------------------------------------------------------------------*/
-/*------------------------------------------------------------------*/
+INSERT INTO DATACENTER.FuncionalidadPorRol(fxrol_rol_Id,fxrol_func_Id, fxrol_Estado)
+VALUES (1, 2, 'H') --H HABILITADO D DESHABILITADO
+GO
+
+INSERT INTO DATACENTER.FuncionalidadPorRol(fxrol_rol_Id,fxrol_func_Id, fxrol_Estado)
+VALUES (1, 3, 'H') --H HABILITADO D DESHABILITADO
+GO
+
+INSERT INTO DATACENTER.FuncionalidadPorRol(fxrol_rol_Id,fxrol_func_Id, fxrol_Estado)
+VALUES (2, 1, 'H') --H HABILITADO D DESHABILITADO
+GO
+
+----INSERTAMOS ADMINISTRADORES 
+INSERT INTO DATACENTER.Administrador(adm_Username, adm_password, adm_cant_intentos, adm_rol_Id)
+VALUES ('frann96','w23e',0,1)
+
+INSERT INTO DATACENTER.Administrador(adm_Username, adm_password, adm_cant_intentos, adm_rol_Id)
+VALUES ('dieguito12','w23e',0,1)
+
+INSERT INTO DATACENTER.Administrador(adm_Username, adm_password, adm_cant_intentos, adm_rol_Id)
+VALUES ('maty32','w23e',0,1)
+
+INSERT INTO DATACENTER.Administrador(adm_Username, adm_password, adm_cant_intentos, adm_rol_Id)
+VALUES ('ani18','w23e',0,1)
 
 
