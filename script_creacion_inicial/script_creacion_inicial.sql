@@ -60,7 +60,7 @@ GO
 
 CREATE TABLE DATACENTER.Cliente
 (cli_Dni numeric(18,0) NOT NULL,
-cli_rol_Id int NOT NULL,
+cli_rol_Id int NOT NULL DEFAULT 2, --Los Clientes tienen ID_ROL = 2
 cli_Nombre nvarchar(255) NULL,
 cli_Apellido nvarchar(255) NULL,
 cli_Dir nvarchar(255) NULL,
@@ -92,11 +92,11 @@ GO
 --AGREGAMOS ROLES
 
 INSERT INTO DATACENTER.Rol(rol_Nombre, rol_Estado) --no ponemos ID ya que se autoincrementa
-VALUES ('Administrador', 'T')
+VALUES ('Administrador', 'H') --H HABILITADO D DESHABILITADO
 GO
 
 INSERT INTO DATACENTER.Rol(rol_Nombre, rol_Estado) --no ponemos ID ya que se autoincrementa
-VALUES ('Cliente', 'F')
+VALUES ('Cliente', 'H') --H HABILITADO D DESHABILITADO
 GO
 
 --ASOCIAMOS ROLES CON FUNCIONES
@@ -129,5 +129,13 @@ VALUES ('maty32','w23e',0,1)
 
 INSERT INTO DATACENTER.Administrador(adm_Username, adm_password, adm_cant_intentos, adm_rol_Id)
 VALUES ('ani18','w23e',0,1)
+
+/*------------------------------------------------------------------*/
+/*-----------------MIGRACION DE CLIENTES----------------------------*/
+
+INSERT INTO DATACENTER.Cliente(cli_Dni, cli_Nombre, cli_Apellido, cli_Dir, cli_Telefono, cli_Mail, Cli_Fecha_Nac)
+	SELECT DISTINCT cli_Dni, cli_Nombre, cli_Apellido, cli_Dir, cli_Telefono, cli_Mail, Cli_Fecha_Nac
+	FROM gd_esquema.Maestra
+GO
 
 
