@@ -74,6 +74,44 @@ FOREIGN KEY (cli_rol_Id) REFERENCES DATACENTER.Rol (rol_Id),
 PRIMARY KEY (cli_Dni))
 GO
 
+/*------------------------------------------------------------------*/
+/*-------------------CREAMOS TABLA CANJE----------------------------*/
+
+CREATE TABLE DATACENTER.Canje
+(canj_Id int IDENTITY (1,1) NOT NULL,
+canj_cli_Dni numeric (18,0) NOT NULL,
+canj_prem_Id int NOT NULL,
+canj_cant_retirada int  NULL,
+canj_fecha datetime NULL
+PRIMARY KEY (canj_Id),
+FOREIGN KEY (canj_cli_Dni) REFERENCES DATACENTER.Cliente (cli_Dni)
+)
+GO
+
+/*------------------------------------------------------------------*/
+/*-----------------CREAMOS TABLA PREMIO-----------------------------*/
+
+CREATE TABLE DATACENTER.Premio
+(prem_Id int IDENTITY (1,1) NOT NULL,
+prem_nombre nvarchar(255) NULL,
+prem_costo_Puntos int NULL,
+prem_stock int NULL,
+PRIMARY KEY (prem_Id)
+)
+GO
+
+/*------------------------------------------------------------------*/
+/*---------------CREAMOS TABLA PREMIOPORCANJE-----------------------*/
+
+CREATE TABLE DATACENTER.PremioPorCanje
+(premxCanj_canj_Id int NOT NULL,
+premxCanj_prem_Id int NOT NULL,
+FOREIGN KEY (premxCanj_canj_Id) REFERENCES DATACENTER.Canje (canj_Id),
+FOREIGN KEY (premxCanj_prem_Id) REFERENCES DATACENTER.Premio (prem_Id),
+PRIMARY KEY (premxCanj_canj_Id, premxCanj_prem_Id)
+)
+GO
+
 /* ---------------------PRUEBAS-------------------------- */
 
 --AGREGAMOS FUNCIONALIDADES 
@@ -129,6 +167,19 @@ VALUES ('maty32','w23e',0,1)
 
 INSERT INTO DATACENTER.Administrador(adm_Username, adm_password, adm_cant_intentos, adm_rol_Id)
 VALUES ('ani18','w23e',0,1)
+
+
+--AGREGAMOS PREMIOS
+
+INSERT INTO 
+DATACENTER.Premio(prem_nombre, prem_costo_Puntos, prem_stock)
+VALUES ('Televisor Led 32', 100, 50)
+GO
+
+INSERT INTO 
+DATACENTER.Premio(prem_nombre, prem_costo_Puntos, prem_stock)
+VALUES ('Notebook Lenovo G470', 150, 30)
+GO
 
 /*------------------------------------------------------------------*/
 /*-----------------MIGRACION DE CLIENTES----------------------------*/
