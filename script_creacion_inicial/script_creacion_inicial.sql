@@ -112,6 +112,59 @@ PRIMARY KEY (premxCanj_canj_Id, premxCanj_prem_Id)
 )
 GO
 
+/*------------------------------------------------------------------*/
+/*-----------------CREAMOS TABLA TIPO TARJETA-----------------------*/
+
+CREATE TABLE DATACENTER.TipoTarjeta
+(tipo_Id int IDENTITY (1,1) NOT NULL PRIMARY KEY,
+tipo_descripcion nvarchar(255) NULL,
+tipo_cuotas char NULL
+)
+GO
+/*------------------------------------------------------------------*/
+/*-----------------CREAMOS TABLA SERVICIO---------------------------*/
+
+CREATE TABLE DATACENTER.Servicio
+(serv_Id int IDENTITY (1,1) PRIMARY KEY NOT NULL ,
+serv_tipo char NULL,
+serc_porc_adicional numeric (18,2) NULL
+)
+GO
+
+/*------------------------------------------------------------------*/
+/*-----------------CREAMOS TABLA RECORRIDO--------------------------*/
+
+CREATE TABLE DATACENTER.Recorrido
+(reco_Id int IDENTITY (1,1) NOT NULL,
+reco_serv_Id int NOT NULL,
+reco_origen nvarchar(255) NULL,
+reco_destino nvarchar(255) NULL,
+reco_precio_base_KG numeric(18,2) NULL,
+reco_precio_base_pasaje numeric (18,2) NULL,
+FOREIGN KEY (reco_serv_Id) REFERENCES DATACENTER.Servicio (serv_Id),
+PRIMARY KEY (reco_Id)
+)
+GO
+
+/*------------------------------------------------------------------*/
+/*-----------------CREAMOS TABLA COMPRA-----------------------------*/
+
+CREATE TABLE DATACENTER.Compra
+(comp_Id int IDENTITY (1,1) NOT NULL,
+comp_comprador_Dni numeric (18,0) NOT NULL,
+comp_tipo_Tarj_Id int NOT NULL,
+comp_reco_Id int NOT NULL,
+comp_cant_pasajes int NULL,
+comp_cant_total_KG numeric (18,0) NULL, 
+comp_costo_Total numeric (18,2) NULL,
+comp_fecha_compra datetime NULL,
+FOREIGN KEY (comp_comprador_Dni) REFERENCES DATACENTER.Cliente (cli_Dni),
+FOREIGN KEY (comp_tipo_Tarj_Id) REFERENCES DATACENTER.TipoTarjeta (tipo_Id),
+FOREIGN KEY (comp_reco_Id) REFERENCES DATACENTER.Recorrido (reco_Id),
+PRIMARY KEY (comp_Id)
+)
+GO
+
 /* ---------------------PRUEBAS-------------------------- */
 
 --AGREGAMOS FUNCIONALIDADES 
