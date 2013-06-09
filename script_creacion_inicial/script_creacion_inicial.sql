@@ -165,6 +165,77 @@ PRIMARY KEY (comp_Id)
 )
 GO
 
+/*------------------------------------------------------------------*/
+/*-------------------CREAMOS TABLA MARCA----------------------------*/
+
+CREATE TABLE DATACENTER.Marca
+(marc_Id int IDENTITY (1,1) NOT NULL PRIMARY KEY,
+marc_nombre nvarchar(255) NULL
+)
+GO
+
+/*------------------------------------------------------------------*/
+/*-------------------CREAMOS TABLA MICRO----------------------------*/
+
+CREATE TABLE DATACENTER.Micro
+(mic_patente nvarchar(255) NOT NULL,
+mic_marc_Id int NOT NULL,
+mic_serv_Id int NOT NULL,
+mic_cant_butacas int NULL,
+mic_cant_kg_disponibles numeric (18,0) NULL,
+mic_modelo nvarchar(255) NULL,
+mic_nro int IDENTITY (1,1) NOT NULL,  -------------VERIFICAR--------------
+mic_fecha_alta datetime NULL,
+mic_fecha_baja_def datetime NULL,
+FOREIGN KEY (mic_marc_Id) REFERENCES DATACENTER.Marca (marc_Id),
+FOREIGN KEY (mic_serv_Id) REFERENCES DATACENTER.Servicio (serv_Id),
+PRIMARY KEY (mic_patente)
+)
+GO
+
+/*------------------------------------------------------------------*/
+/*----------------CREAMOS TABLA ESTADOMICRO-------------------------*/
+
+CREATE TABLE DATACENTER.EstadoMicro
+(est_Id int IDENTITY (1,1) NOT NULL,
+est_mic_patente nvarchar(255) NOT NULL,
+est_fecha_fuera_serv datetime NULL,
+est_fecha_reingreso datetime NULL,
+FOREIGN KEY (est_mic_patente) REFERENCES DATACENTER.Micro (mic_patente),
+PRIMARY KEY (est_Id)
+)
+GO
+
+/*------------------------------------------------------------------*/
+/*-------------------CREAMOS TABLA BUTACA---------------------------*/
+
+CREATE TABLE DATACENTER.Butaca
+(but_nro numeric (18,0) NOT NULL,
+but_mic_patente nvarchar(255) NOT NULL,
+but_tipo nvarchar(255) NULL,
+but_piso numeric (18,0) NULL,
+FOREIGN KEY (but_mic_patente) REFERENCES DATACENTER.Micro (mic_patente),
+PRIMARY KEY (but_nro, but_mic_patente)
+)
+GO
+
+/*------------------------------------------------------------------*/
+/*---------------------CREAMOS TABLA PASAJE-------------------------*/
+
+CREATE TABLE DATACENTER.Pasaje
+(pas_Id int IDENTITY (1,1) NOT NULL,
+pas_nro_butaca numeric (18,0) NOT NULL,
+pas_micro_patente nvarchar(255) NOT NULL,
+pas_cli_Dni numeric (18,0) NOT NULL,
+pas_compra_Id int NOT NULL,
+pas_precio numeric(18,2) NULL,
+FOREIGN KEY (pas_nro_butaca, pas_micro_patente) REFERENCES DATACENTER.Butaca (but_nro, but_mic_patente),
+FOREIGN KEY (pas_cli_Dni) REFERENCES DATACENTER.Cliente (cli_Dni),
+FOREIGN KEY (pas_compra_Id) REFERENCES DATACENTER.Compra (comp_Id),
+PRIMARY KEY (pas_Id)
+)
+GO
+
 /* ---------------------PRUEBAS-------------------------- */
 
 --AGREGAMOS FUNCIONALIDADES 
