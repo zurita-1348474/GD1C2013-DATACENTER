@@ -132,16 +132,26 @@ serc_porc_adicional numeric (18,2) NULL
 GO
 
 /*------------------------------------------------------------------*/
+/*---------------------CREAMOS TABLA CIUDAD-------------------------*/
+
+CREATE TABLE DATACENTER.Ciudad
+(ciu_nombre nvarchar(255) NOT NULL PRIMARY KEY,
+ciu_Id int IDENTITY (1,1) NOT NULL)
+GO
+
+/*------------------------------------------------------------------*/
 /*-----------------CREAMOS TABLA RECORRIDO--------------------------*/
 
 CREATE TABLE DATACENTER.Recorrido
 (reco_Id int IDENTITY (1,1) NOT NULL,
 reco_serv_Id int NOT NULL,
-reco_origen nvarchar(255) NULL,
-reco_destino nvarchar(255) NULL,
+reco_origen nvarchar(255) NOT NULL,
+reco_destino nvarchar(255) NOT NULL,
 reco_precio_base_KG numeric(18,2) NULL,
 reco_precio_base_pasaje numeric (18,2) NULL,
 FOREIGN KEY (reco_serv_Id) REFERENCES DATACENTER.Servicio (serv_Id),
+FOREIGN KEY (reco_origen) REFERENCES DATACENTER.Ciudad (ciu_nombre),
+FOREIGN KEY (reco_destino) REFERENCES DATACENTER.Ciudad (ciu_nombre),
 PRIMARY KEY (reco_Id)
 )
 GO
@@ -235,6 +245,66 @@ FOREIGN KEY (pas_compra_Id) REFERENCES DATACENTER.Compra (comp_Id),
 PRIMARY KEY (pas_Id)
 )
 GO
+
+/*------------------------------------------------------------------*/
+/*---------------------CREAMOS TABLA PAQUETE-------------------------*/
+
+CREATE TABLE DATACENTER.Paquete
+(paq_Id int IDENTITY (1,1) NOT NULL,
+paq_comp_Id int NOT NULL,
+paq_precio numeric (18,2) NULL,
+paq_KG numeric (18,0)NULL,
+FOREIGN KEY (paq_comp_Id) REFERENCES DATACENTER.Compra (comp_Id),
+PRIMARY KEY (paq_Id)
+)
+GO
+
+/*------------------------------------------------------------------*/
+/*---------------------CREAMOS TABLA DEVOLUCION-------------------------*/
+
+CREATE TABLE DATACENTER.Devolucion
+(dev_Id int IDENTITY (1,1) NOT NULL,
+dev_comp_Id int NOT NULL,
+dev_pas_Id int NULL,       --NULL POR QUE LA DEVOLUCION PUEDE TENER PAQ Y/O PASAJES
+dev_paq_Id int NULL,
+dev_fecha datetime NULL,
+dev_motivo nvarchar(255) NULL,
+FOREIGN KEY (dev_pas_Id) REFERENCES DATACENTER.Pasaje (pas_Id),
+FOREIGN KEY (dev_paq_Id) REFERENCES DATACENTER.Paquete (paq_Id),
+PRIMARY KEY (dev_Id)
+)
+GO
+
+
+/*------------------------------------------------------------------*/
+/*---------------------CREAMOS TABLA VIAJE-------------------------*/
+
+CREATE TABLE DATACENTER.Viaje
+(viaj_Id int IDENTITY (1,1) NOT NULL,
+viaj_mic_patente nvarchar(255) NOT NULL,
+viaj_reco_Id int NOT NULL,
+viaj_fecha_salida datetime NULL,
+viaj_fecha_lleg_estimada datetime NULL,
+viaj_fecha_llegada datetime NULL,
+FOREIGN KEY (viaj_mic_patente) REFERENCES DATACENTER.Micro (mic_patente), 
+FOREIGN KEY (viaj_reco_Id) REFERENCES DATACENTER.Recorrido (reco_Id),
+PRIMARY KEY (viaj_Id)
+)
+GO
+
+/*------------------------------------------------------------------*/
+/*---------------------CREAMOS TABLA ARRIBO-------------------------*/
+
+CREATE TABLE DATACENTER.Arribo
+(arri_fecha_llegada datetime NOT NULL,   
+arri_mic_patente nvarchar(255) NOT NULL,         --DATO INGRESADO EN LA TERMINAL DE LLEGADA NO ES FK
+arri_viaj_Id int NOT NULL,
+arri_ciu_arribada nvarchar(255) NOT NULL, 
+FOREIGN KEY (arri_ciu_arribada) REFERENCES DATACENTER.Ciudad (ciu_nombre), --SEGUN DER ES FK => CONSULTA TABLA CIUDAD
+FOREIGN KEY (arri_viaj_Id) REFERENCES DATACENTER.Viaje (viaj_Id),          --SEGUN DER ES FK => CONSULTA TABLA VIAJE
+PRIMARY KEY (arri_fecha_llegada, arri_mic_patente)
+)
+GO 
 
 /* ---------------------PRUEBAS-------------------------- */
 
