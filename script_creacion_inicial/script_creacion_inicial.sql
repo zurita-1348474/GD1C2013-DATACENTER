@@ -1,8 +1,8 @@
-Use [GD1C2013]    /* Utilizamos una base de datos EXTERNA,la base a la cual se dirigirán las próximas consultas SQL en el proceso actual. */
+Use [GD1C2013]    /* Utilizamos una base de datos EXTERNA,la base a la cual se dirigirï¿½n las prï¿½ximas consultas SQL en el proceso actual. */
 Go 
-/* Signo de finalización de lotes de sentencia*/
+/* Signo de finalizaciï¿½n de lotes de sentencia*/
 
-Create Schema DATACENTER AUTHORIZATION [gd]   /* Creamos un Schema nuevo(Modelo de Datos/contiene Tablas,Indices y demas estructuras de negocio) ; El usuario que poseerá el schema (OWNER) sera: GD*/   
+Create Schema DATACENTER AUTHORIZATION [gd]   /* Creamos un Schema nuevo(Modelo de Datos/contiene Tablas,Indices y demas estructuras de negocio) ; El usuario que poseerï¿½ el schema (OWNER) sera: GD*/   
 Go
 /*------------------INICIO DE CREACION DE TABLAS--------------------*/
 /*------------------------------------------------------------------*/
@@ -300,7 +300,6 @@ CREATE TABLE DATACENTER.Arribo
 arri_mic_patente nvarchar(255) NOT NULL,         --DATO INGRESADO EN LA TERMINAL DE LLEGADA NO ES FK
 arri_viaj_Id int NOT NULL,
 arri_ciu_arribada nvarchar(255) NOT NULL, 
-FOREIGN KEY (arri_ciu_arribada) REFERENCES DATACENTER.Ciudad (ciu_nombre), --SEGUN DER ES FK => CONSULTA TABLA CIUDAD
 FOREIGN KEY (arri_viaj_Id) REFERENCES DATACENTER.Viaje (viaj_Id),          --SEGUN DER ES FK => CONSULTA TABLA VIAJE
 PRIMARY KEY (arri_fecha_llegada, arri_mic_patente)
 )
