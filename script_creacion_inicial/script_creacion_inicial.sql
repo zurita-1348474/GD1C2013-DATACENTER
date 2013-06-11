@@ -403,4 +403,18 @@ INSERT INTO DATACENTER.Ciudad(ciu_nombre)
 	FROM gd_esquema.Maestra
 GO
 
+/*------------------------------------------------------------------*/
+/*----------------MIGRACION DE MICRO--------------------------------*/
+
+			-- CREA LA VISTA NECESARIA PARA LA MIGRACION --
+CREATE VIEW Micros_Migrados(Micro_Patente, Micro_Modelo, Micro_KG_Disponibles, Micro_Cant_Butacas, Micro_Marca, Micro_Tipo_Serv) AS
+select distinct Micro_Patente, Micro_Modelo, Micro_KG_Disponibles, MAX(butaca_nro) as Micro_Cant_Butacas, Micro_Marca, Tipo_Servicio
+from gd_esquema.Maestra
+group by Micro_Patente, Micro_Modelo, Micro_KG_Disponibles, Micro_Marca, Tipo_Servicio
+
+			-- AHORA SI REALIZAMOS LA MIGRACION EN BASE A LOS CAMPOS NECESARIOS --
+insert into DATACENTER.Micro(mic_patente, mic_modelo, mic_cant_kg_disponibles, mic_cant_butacas, mic_marc_Id, mic_serv_Id)
+select Micro_Patente, Micro_Modelo, Micro_KG_Disponibles, Micro_Cant_Butacas, marc_Id, serv_Id
+from micros_migrados join DATACENTER.Marca on Micro_Marca = marc_nombre join DATACENTER.Servicio on Micro_Tipo_Serv = serv_tipo
+
 
