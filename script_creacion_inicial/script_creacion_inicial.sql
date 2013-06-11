@@ -157,7 +157,7 @@ GO
 CREATE TABLE DATACENTER.Compra
 (comp_Id int IDENTITY (1,1) NOT NULL,
 comp_comprador_Dni numeric (18,0) NOT NULL,
-comp_tipo_Tarj_Id int NOT NULL,
+comp_tipo_Tarj_Id int  NULL,
 comp_reco_cod numeric(18,0) NOT NULL,
 comp_cant_pasajes int NULL,
 comp_cant_total_KG numeric (18,0) NULL, 
