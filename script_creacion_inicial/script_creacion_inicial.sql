@@ -4,6 +4,7 @@ Go
 
 Create Schema DATACENTER AUTHORIZATION [gd]   /* Creamos un Schema nuevo(Modelo de Datos/contiene Tablas,Indices y demas estructuras de negocio) ; El usuario que poseera el schema (OWNER) sera: GD*/   
 Go
+
 /*------------------INICIO DE CREACION DE TABLAS--------------------*/
 
 /*------------------------------------------------------------------*/
