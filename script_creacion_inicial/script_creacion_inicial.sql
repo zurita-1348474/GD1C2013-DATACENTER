@@ -122,7 +122,7 @@ GO
 CREATE TABLE DATACENTER.Servicio
 (serv_Id int IDENTITY (1,1) PRIMARY KEY NOT NULL ,
 serv_tipo char NULL,
-serc_porc_adicional numeric (18,2) NULL
+serv_porc_adicional numeric (18,2) NULL
 )
 GO
 
