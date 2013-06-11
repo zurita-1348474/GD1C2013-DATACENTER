@@ -418,3 +418,11 @@ select Micro_Patente, Micro_Modelo, Micro_KG_Disponibles, Micro_Cant_Butacas, ma
 from micros_migrados join DATACENTER.Marca on Micro_Marca = marc_nombre join DATACENTER.Servicio on Micro_Tipo_Serv = serv_tipo
 
 
+/*------------------------------------------------------------------*/
+/*----------------MIGRACION DE RECORRIDO-----------------------------*/
+INSERT INTO DATACENTER.Recorrido(reco_cod, reco_serv_Id, reco_origen, reco_destino, reco_precio_base_KG, reco_precio_base_pasaje)
+	SELECT DISTINCT t1.Recorrido_Codigo, serv_Id, t1.Recorrido_Ciudad_Origen, t1.Recorrido_Ciudad_Destino, t1.Recorrido_Precio_BaseKG, t2.Recorrido_Precio_BasePasaje
+	FROM gd_esquema.Maestra t1 join gd_esquema.Maestra t2 ON (t1.Recorrido_Codigo = t2.Recorrido_Codigo) join DATACENTER.Servicio on t1.Tipo_Servicio = serv_tipo
+	WHERE (t1.Recorrido_Precio_BaseKG <> '0' and t2.Recorrido_Precio_BasePasaje <> '0') 
+	ORDER BY 1
+GO
