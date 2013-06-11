@@ -395,3 +395,12 @@ INSERT INTO DATACENTER.Marca(marc_nombre)
 	FROM gd_esquema.Maestra
 go
 
+/*------------------------------------------------------------------*/
+/*----------------MIGRACION DE CIUDAD-------------------------------*/
+
+INSERT INTO DATACENTER.Ciudad(ciu_nombre)
+	SELECT DISTINCT Recorrido_Ciudad_Destino -- Vale esto xq ciudades_Destino son las mismas que ciudades_Origen
+	FROM gd_esquema.Maestra
+GO
+
+
