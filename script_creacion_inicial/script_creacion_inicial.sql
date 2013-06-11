@@ -378,4 +378,14 @@ INSERT INTO DATACENTER.Cliente(cli_Dni, cli_Nombre, cli_Apellido, cli_Dir, cli_T
 	FROM gd_esquema.Maestra
 GO
 
+/*------------------------------------------------------------------*/
+/*----------------MIGRACION DE SERVICIO-----------------------------*/
+
+INSERT INTO DATACENTER.Servicio(serv_tipo, serv_porc_adicional)
+	SELECT DISTINCT(Tipo_Servicio), ROUND(((Pasaje_Precio-Recorrido_Precio_BasePasaje)/Recorrido_Precio_BasePasaje)*100,0)
+	FROM gd_esquema.Maestra
+	WHERE Recorrido_Precio_BasePasaje <> 0
+	ORDER BY 2
+GO
+
 
