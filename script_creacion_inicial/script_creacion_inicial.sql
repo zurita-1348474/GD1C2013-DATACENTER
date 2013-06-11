@@ -388,4 +388,10 @@ INSERT INTO DATACENTER.Servicio(serv_tipo, serv_porc_adicional)
 	ORDER BY 2
 GO
 
+/*------------------------------------------------------------------*/
+/*----------------MIGRACION DE MARCA-----------------------------*/
+INSERT INTO DATACENTER.Marca(marc_nombre)
+	SELECT distinct Micro_Marca
+	FROM gd_esquema.Maestra
+go
 
