@@ -1,11 +1,13 @@
-Use [GD1C2013]    /* Utilizamos una base de datos EXTERNA,la base a la cual se dirigir�n las pr�ximas consultas SQL en el proceso actual. */
+Use [GD1C2013]    /* Utilizamos una base de datos EXTERNA,la base a la cual se dirigiran las proximas consultas SQL en el proceso actual. */
 Go 
-/* Signo de finalizaci�n de lotes de sentencia*/
+/* Signo de finalizacion de lotes de sentencia*/
 
-Create Schema DATACENTER AUTHORIZATION [gd]   /* Creamos un Schema nuevo(Modelo de Datos/contiene Tablas,Indices y demas estructuras de negocio) ; El usuario que poseer� el schema (OWNER) sera: GD*/   
+Create Schema DATACENTER AUTHORIZATION [gd]   /* Creamos un Schema nuevo(Modelo de Datos/contiene Tablas,Indices y demas estructuras de negocio) ; El usuario que poseera el schema (OWNER) sera: GD*/   
 Go
 /*------------------INICIO DE CREACION DE TABLAS--------------------*/
+
 /*------------------------------------------------------------------*/
+/*-----------------------CREAMOS TABLA FUNC-------------------------*/
 
 CREATE TABLE DATACENTER.Funcionalidad
 (func_Id int IDENTITY (1,1) PRIMARY KEY NOT NULL,
@@ -13,7 +15,7 @@ func_Nombre nvarchar(255) NOT NULL)
 GO
 
 /*------------------------------------------------------------------*/
-/*------------------------------------------------------------------*/
+/*------------------------CREAMOS TABLA ROL-------------------------*/
 
 CREATE TABLE DATACENTER.Rol
 (rol_Id int IDENTITY (1,1) PRIMARY KEY NOT NULL,
@@ -22,7 +24,7 @@ rol_Estado char NOT NULL)
 GO
 
 /*------------------------------------------------------------------*/
-/*------------------------------------------------------------------*/
+/*----------------CREAMOS TABLA FUNCXROL----------------------------*/
 
 CREATE TABLE DATACENTER.FuncionalidadPorRol
 (fxrol_rol_Id int NOT NULL, 
@@ -34,14 +36,6 @@ PRIMARY KEY (fxrol_rol_Id, fxrol_func_Id)
 )
 GO
 
---------------DUDOSOO-----------------------
-/*
-CREATE TABLE DATACENTER.Usuario
-(usu_Id int IDENTITY (1,1) PRIMARY KEY NOT NULL,
-usu_Rol_Id int NOT NULL,
-FOREIGN KEY (usu_Rol_Id) references DATACENTER.Rol (rol_Id) 
-)
-*/
 
 /*------------------------------------------------------------------*/
 /*-----------------CREAMOS TABLA ADMINISTRADOR----------------------*/
@@ -143,7 +137,7 @@ GO
 /*-----------------CREAMOS TABLA RECORRIDO--------------------------*/
 
 CREATE TABLE DATACENTER.Recorrido
-(reco_Id int IDENTITY (1,1) NOT NULL,
+(reco_cod numeric(18,0) NOT NULL,
 reco_serv_Id int NOT NULL,
 reco_origen nvarchar(255) NOT NULL,
 reco_destino nvarchar(255) NOT NULL,
@@ -152,7 +146,7 @@ reco_precio_base_pasaje numeric (18,2) NULL,
 FOREIGN KEY (reco_serv_Id) REFERENCES DATACENTER.Servicio (serv_Id),
 FOREIGN KEY (reco_origen) REFERENCES DATACENTER.Ciudad (ciu_nombre),
 FOREIGN KEY (reco_destino) REFERENCES DATACENTER.Ciudad (ciu_nombre),
-PRIMARY KEY (reco_Id)
+PRIMARY KEY (reco_cod)
 )
 GO
 
@@ -163,14 +157,14 @@ CREATE TABLE DATACENTER.Compra
 (comp_Id int IDENTITY (1,1) NOT NULL,
 comp_comprador_Dni numeric (18,0) NOT NULL,
 comp_tipo_Tarj_Id int NOT NULL,
-comp_reco_Id int NOT NULL,
+comp_reco_cod numeric(18,0) NOT NULL,
 comp_cant_pasajes int NULL,
 comp_cant_total_KG numeric (18,0) NULL, 
 comp_costo_Total numeric (18,2) NULL,
 comp_fecha_compra datetime NULL,
 FOREIGN KEY (comp_comprador_Dni) REFERENCES DATACENTER.Cliente (cli_Dni),
 FOREIGN KEY (comp_tipo_Tarj_Id) REFERENCES DATACENTER.TipoTarjeta (tipo_Id),
-FOREIGN KEY (comp_reco_Id) REFERENCES DATACENTER.Recorrido (reco_Id),
+FOREIGN KEY (comp_reco_cod) REFERENCES DATACENTER.Recorrido (reco_cod),
 PRIMARY KEY (comp_Id)
 )
 GO
@@ -282,12 +276,12 @@ GO
 CREATE TABLE DATACENTER.Viaje
 (viaj_Id int IDENTITY (1,1) NOT NULL,
 viaj_mic_patente nvarchar(255) NOT NULL,
-viaj_reco_Id int NOT NULL,
+viaj_reco_cod numeric(18,0) NOT NULL,
 viaj_fecha_salida datetime NULL,
 viaj_fecha_lleg_estimada datetime NULL,
 viaj_fecha_llegada datetime NULL,
 FOREIGN KEY (viaj_mic_patente) REFERENCES DATACENTER.Micro (mic_patente), 
-FOREIGN KEY (viaj_reco_Id) REFERENCES DATACENTER.Recorrido (reco_Id),
+FOREIGN KEY (viaj_reco_cod) REFERENCES DATACENTER.Recorrido (reco_cod),
 PRIMARY KEY (viaj_Id)
 )
 GO
