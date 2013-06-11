@@ -228,7 +228,7 @@ GO
 /*---------------------CREAMOS TABLA PASAJE-------------------------*/
 
 CREATE TABLE DATACENTER.Pasaje
-(pas_Id int IDENTITY (1,1) NOT NULL,
+(pas_cod numeric(18,0) NOT NULL,
 pas_nro_butaca numeric (18,0) NOT NULL,
 pas_micro_patente nvarchar(255) NOT NULL,
 pas_cli_Dni numeric (18,0) NOT NULL,
@@ -237,7 +237,7 @@ pas_precio numeric(18,2) NULL,
 FOREIGN KEY (pas_nro_butaca, pas_micro_patente) REFERENCES DATACENTER.Butaca (but_nro, but_mic_patente),
 FOREIGN KEY (pas_cli_Dni) REFERENCES DATACENTER.Cliente (cli_Dni),
 FOREIGN KEY (pas_compra_Id) REFERENCES DATACENTER.Compra (comp_Id),
-PRIMARY KEY (pas_Id)
+PRIMARY KEY (pas_cod)
 )
 GO
 
@@ -245,12 +245,12 @@ GO
 /*---------------------CREAMOS TABLA PAQUETE-------------------------*/
 
 CREATE TABLE DATACENTER.Paquete
-(paq_Id int IDENTITY (1,1) NOT NULL,
+(paq_cod numeric(18,0) NOT NULL,
 paq_comp_Id int NOT NULL,
 paq_precio numeric (18,2) NULL,
 paq_KG numeric (18,0)NULL,
 FOREIGN KEY (paq_comp_Id) REFERENCES DATACENTER.Compra (comp_Id),
-PRIMARY KEY (paq_Id)
+PRIMARY KEY (paq_cod)
 )
 GO
 
@@ -260,12 +260,13 @@ GO
 CREATE TABLE DATACENTER.Devolucion
 (dev_Id int IDENTITY (1,1) NOT NULL,
 dev_comp_Id int NOT NULL,
-dev_pas_Id int NULL,       --NULL POR QUE LA DEVOLUCION PUEDE TENER PAQ Y/O PASAJES
-dev_paq_Id int NULL,
+dev_pas_cod numeric(18,0) NULL,       --NULL POR QUE LA DEVOLUCION PUEDE TENER PAQ Y/O PASAJES
+dev_paq_cod numeric(18,0) NULL,
 dev_fecha datetime NULL,
 dev_motivo nvarchar(255) NULL,
-FOREIGN KEY (dev_pas_Id) REFERENCES DATACENTER.Pasaje (pas_Id),
-FOREIGN KEY (dev_paq_Id) REFERENCES DATACENTER.Paquete (paq_Id),
+FOREIGN KEY (dev_comp_Id) REFERENCES DATACENTER.Compra (comp_Id),
+FOREIGN KEY (dev_pas_cod) REFERENCES DATACENTER.Pasaje (pas_cod),
+FOREIGN KEY (dev_paq_cod) REFERENCES DATACENTER.Paquete (paq_cod),
 PRIMARY KEY (dev_Id)
 )
 GO
