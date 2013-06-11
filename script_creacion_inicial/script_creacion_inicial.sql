@@ -411,18 +411,44 @@ CREATE VIEW Micros_Migrados(Micro_Patente, Micro_Modelo, Micro_KG_Disponibles, M
 select distinct Micro_Patente, Micro_Modelo, Micro_KG_Disponibles, MAX(butaca_nro) as Micro_Cant_Butacas, Micro_Marca, Tipo_Servicio
 from gd_esquema.Maestra
 group by Micro_Patente, Micro_Modelo, Micro_KG_Disponibles, Micro_Marca, Tipo_Servicio
+go
 
 			-- AHORA SI REALIZAMOS LA MIGRACION EN BASE A LOS CAMPOS NECESARIOS --
 insert into DATACENTER.Micro(mic_patente, mic_modelo, mic_cant_kg_disponibles, mic_cant_butacas, mic_marc_Id, mic_serv_Id)
 select Micro_Patente, Micro_Modelo, Micro_KG_Disponibles, Micro_Cant_Butacas, marc_Id, serv_Id
 from micros_migrados join DATACENTER.Marca on Micro_Marca = marc_nombre join DATACENTER.Servicio on Micro_Tipo_Serv = serv_tipo
-
+go
 
 /*------------------------------------------------------------------*/
 /*----------------MIGRACION DE RECORRIDO-----------------------------*/
+
 INSERT INTO DATACENTER.Recorrido(reco_cod, reco_serv_Id, reco_origen, reco_destino, reco_precio_base_KG, reco_precio_base_pasaje)
 	SELECT DISTINCT t1.Recorrido_Codigo, serv_Id, t1.Recorrido_Ciudad_Origen, t1.Recorrido_Ciudad_Destino, t1.Recorrido_Precio_BaseKG, t2.Recorrido_Precio_BasePasaje
 	FROM gd_esquema.Maestra t1 join gd_esquema.Maestra t2 ON (t1.Recorrido_Codigo = t2.Recorrido_Codigo) join DATACENTER.Servicio on t1.Tipo_Servicio = serv_tipo
 	WHERE (t1.Recorrido_Precio_BaseKG <> '0' and t2.Recorrido_Precio_BasePasaje <> '0') 
 	ORDER BY 1
+GO
+
+/*------------------------------------------------------------------*/
+/*----------------MIGRACION COMPRA-----------------------------*/
+
+INSERT INTO DATACENTER.Compra(comp_cant_pasajes, comp_cant_total_KG, comp_reco_cod, comp_comprador_Dni, comp_costo_Total, comp_fecha_compra)
+SELECT 1 AS cant_pasajes, Paquete_KG AS cant_total_kg, Recorrido_Codigo, Cli_Dni AS comprador_Dni , Pasaje_Precio AS costo_total, Pasaje_FechaCompra AS fecha_compra
+FROM gd_esquema.Maestra
+WHERE  Pasaje_Codigo<>0 --NOS REFERIMOS A PASAJES
+UNION ALL --POR SI SE DA ALGUNA REPETICION ; "UNION" ME DEVUELVE LA UNION DE LAS CONSULTAS PERO SIN REPETICIONES (DISTINCT)
+SELECT 0 AS cant_pasajes,Paquete_KG AS cant_total_kg, Recorrido_Codigo, Cli_Dni AS comprador_Dni , Paquete_Precio AS costo_total, Paquete_FechaCompra AS fecha_compra
+FROM gd_esquema.Maestra
+WHERE  Pasaje_Codigo=0 --NOS REFERIMOS A PAQUETE
+GO 
+
+/*------------------------------------------------------------------*/
+/*---------------------MIGRACION BUTACA-----------------------------*/
+
+
+INSERT INTO DATACENTER.Butaca(but_nro, but_mic_patente, but_tipo, but_piso) 
+	SELECT DISTINCT  Butaca_Nro, Micro_Patente,  Butaca_Tipo, Butaca_Piso
+	FROM gd_esquema.Maestra, DATACENTER.Micro
+	WHERE Butaca_Tipo <> '0'  --PARA QUE NO REPITA LA BUTACA NRO°0 CUANDO ENVIAN ENCOMIENDAS
+	ORDER BY Micro_Patente, Butaca_Nro
 GO
