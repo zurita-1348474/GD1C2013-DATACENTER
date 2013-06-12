@@ -449,7 +449,7 @@ GO
 INSERT INTO DATACENTER.Butaca(but_nro, but_mic_patente, but_tipo, but_piso) 
 	SELECT DISTINCT  Butaca_Nro, Micro_Patente,  Butaca_Tipo, Butaca_Piso
 	FROM gd_esquema.Maestra, DATACENTER.Micro
-	WHERE Butaca_Tipo <> '0'  --PARA QUE NO REPITA LA BUTACA NRO°0 CUANDO ENVIAN ENCOMIENDAS
+	WHERE Butaca_Tipo <> '0'  --PARA QUE NO REPITA LA BUTACA NROï¿½0 CUANDO ENVIAN ENCOMIENDAS
 	ORDER BY Micro_Patente, Butaca_Nro
 GO
 
@@ -458,4 +458,14 @@ GO
 INSERT INTO DATACENTER.Viaje(viaj_mic_patente, viaj_reco_cod, viaj_fecha_salida, viaj_fecha_lleg_estimada, viaj_fecha_llegada)
 	SELECT DISTINCT Micro_Patente, Recorrido_Codigo, FechaSalida, Fecha_LLegada_Estimada, FechaLLegada
 	FROM gd_esquema.Maestra
+GO
+
+
+/*------------------------------------------------------------------*/
+/*----------------MIGRACION DE PASAJE-------------------------------*/
+INSERT INTO DATACENTER.Pasaje(pas_cod, pas_nro_butaca, pas_micro_patente, pas_cli_Dni, pas_compra_Id, pas_precio)
+	SELECT M.Pasaje_Codigo, M.Butaca_Nro, M.Micro_Patente, M.Cli_Dni, (SELECT  TOP 1 C.comp_Id FROM DATACENTER.Compra C WHERE C.comp_comprador_Dni = M.Cli_Dni), M.Pasaje_Precio 
+	  FROM gd_esquema.Maestra M 
+	  WHERE Pasaje_Codigo <> 0
+	  ORDER BY  Pasaje_Codigo, Cli_Dni
 GO
