@@ -452,3 +452,10 @@ INSERT INTO DATACENTER.Butaca(but_nro, but_mic_patente, but_tipo, but_piso)
 	WHERE Butaca_Tipo <> '0'  --PARA QUE NO REPITA LA BUTACA NRO°0 CUANDO ENVIAN ENCOMIENDAS
 	ORDER BY Micro_Patente, Butaca_Nro
 GO
+
+/*------------------------------------------------------------------*/
+/*----------------MIGRACION DE VIAJE-----------------------------*/
+INSERT INTO DATACENTER.Viaje(viaj_mic_patente, viaj_reco_cod, viaj_fecha_salida, viaj_fecha_lleg_estimada, viaj_fecha_llegada)
+	SELECT DISTINCT Micro_Patente, Recorrido_Codigo, FechaSalida, Fecha_LLegada_Estimada, FechaLLegada
+	FROM gd_esquema.Maestra
+GO
