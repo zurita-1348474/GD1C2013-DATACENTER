@@ -455,7 +455,7 @@ INSERT INTO DATACENTER.Butaca(but_nro, but_mic_patente, but_tipo, but_piso)
 GO
 
 /*------------------------------------------------------------------*/
-/*----------------MIGRACION DE VIAJE-----------------------------*/
+/*-------------------MIGRACION DE VIAJE-----------------------------*/
 INSERT INTO DATACENTER.Viaje(viaj_mic_patente, viaj_reco_cod, viaj_fecha_salida, viaj_fecha_lleg_estimada, viaj_fecha_llegada)
 	SELECT DISTINCT Micro_Patente, Recorrido_Codigo, FechaSalida, Fecha_LLegada_Estimada, FechaLLegada
 	FROM gd_esquema.Maestra
@@ -470,9 +470,17 @@ INSERT INTO DATACENTER.Pasaje(pas_cod, pas_nro_butaca, pas_micro_patente, pas_cl
  	ORDER BY  Pasaje_Codigo, Cli_Dni, C.comp_Id
 GO
 
+/*------------------------------------------------------------------*/
+/*---------------------MIGRACION DE PAQUETE-------------------------*/
 
-/*UNA VEZ MIGRADO PASAJE Y PAQUETE SE ELÍMINA LA COLUMNA DE MAS DE COMPRA
+INSERT INTO DATACENTER.Paquete (paq_cod, paq_comp_Id, paq_precio, paq_KG)
+	SELECT comp_Codigo_Pas_Paq, comp_Id, comp_costo_Total, comp_cant_total_KG
+	FROM DATACENTER.Compra
+	WHERE comp_cant_total_KG <> 0
+GO
+
+--Eliminamos columna extra en COMPRA que fue utilizada para OPTIMIZAR la Migracion
 ALTER TABLE DATACENTER.Compra
 DROP COLUMN comp_Codigo_Pas_Paq
 GO
-*/
+
