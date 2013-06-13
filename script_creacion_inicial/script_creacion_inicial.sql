@@ -163,6 +163,7 @@ comp_cant_pasajes int NULL,
 comp_cant_total_KG numeric (18,0) NULL, 
 comp_costo_Total numeric (18,2) NULL,
 comp_fecha_compra datetime NULL,
+comp_Codigo_Pas_Paq numeric (18,0) NOT NULL, --COLUMNA AGREGADA TEMPORALMENTE PARA OPTIMIZAR LA MIGRACION
 FOREIGN KEY (comp_comprador_Dni) REFERENCES DATACENTER.Cliente (cli_Dni),
 FOREIGN KEY (comp_tipo_Tarj_Id) REFERENCES DATACENTER.TipoTarjeta (tipo_Id),
 FOREIGN KEY (comp_reco_cod) REFERENCES DATACENTER.Recorrido (reco_cod),
@@ -189,7 +190,7 @@ mic_serv_Id int NOT NULL,
 mic_cant_butacas int NULL,
 mic_cant_kg_disponibles numeric (18,0) NULL,
 mic_modelo nvarchar(255) NULL,
-mic_nro int IDENTITY (1,1) NOT NULL,  -------------VERIFICAR--------------
+mic_nro int IDENTITY (1,1) NOT NULL,  
 mic_fecha_alta datetime NULL,
 mic_fecha_baja_def datetime NULL,
 FOREIGN KEY (mic_marc_Id) REFERENCES DATACENTER.Marca (marc_Id),
@@ -432,12 +433,12 @@ GO
 /*------------------------------------------------------------------*/
 /*----------------MIGRACION COMPRA-----------------------------*/
 
-INSERT INTO DATACENTER.Compra(comp_cant_pasajes, comp_cant_total_KG, comp_reco_cod, comp_comprador_Dni, comp_costo_Total, comp_fecha_compra)
-SELECT 1 AS cant_pasajes, Paquete_KG AS cant_total_kg, Recorrido_Codigo, Cli_Dni AS comprador_Dni , Pasaje_Precio AS costo_total, Pasaje_FechaCompra AS fecha_compra
+INSERT INTO DATACENTER.Compra(comp_cant_pasajes, comp_cant_total_KG, comp_reco_cod, comp_comprador_Dni, comp_costo_Total, comp_fecha_compra, comp_Codigo_Pas_Paq)
+SELECT 1 AS cant_pasajes, Paquete_KG AS cant_total_kg, Recorrido_Codigo, Cli_Dni AS comprador_Dni , Pasaje_Precio AS costo_total, Pasaje_FechaCompra AS fecha_compra, Pasaje_Codigo
 FROM gd_esquema.Maestra
 WHERE  Pasaje_Codigo<>0 --NOS REFERIMOS A PASAJES
 UNION ALL --POR SI SE DA ALGUNA REPETICION ; "UNION" ME DEVUELVE LA UNION DE LAS CONSULTAS PERO SIN REPETICIONES (DISTINCT)
-SELECT 0 AS cant_pasajes,Paquete_KG AS cant_total_kg, Recorrido_Codigo, Cli_Dni AS comprador_Dni , Paquete_Precio AS costo_total, Paquete_FechaCompra AS fecha_compra
+SELECT 0 AS cant_pasajes,Paquete_KG AS cant_total_kg, Recorrido_Codigo, Cli_Dni AS comprador_Dni , Paquete_Precio AS costo_total, Paquete_FechaCompra AS fecha_compra, Paquete_Codigo
 FROM gd_esquema.Maestra
 WHERE  Pasaje_Codigo=0 --NOS REFERIMOS A PAQUETE
 GO 
@@ -449,7 +450,7 @@ GO
 INSERT INTO DATACENTER.Butaca(but_nro, but_mic_patente, but_tipo, but_piso) 
 	SELECT DISTINCT  Butaca_Nro, Micro_Patente,  Butaca_Tipo, Butaca_Piso
 	FROM gd_esquema.Maestra, DATACENTER.Micro
-	WHERE Butaca_Tipo <> '0'  --PARA QUE NO REPITA LA BUTACA NRO�0 CUANDO ENVIAN ENCOMIENDAS
+	WHERE Butaca_Tipo <> '0'  --PARA QUE NO REPITA LA BUTACA NRO 0 CUANDO ENVIAN ENCOMIENDAS
 	ORDER BY Micro_Patente, Butaca_Nro
 GO
 
@@ -463,9 +464,15 @@ GO
 
 /*------------------------------------------------------------------*/
 /*----------------MIGRACION DE PASAJE-------------------------------*/
-INSERT INTO DATACENTER.Pasaje(pas_cod, pas_nro_butaca, pas_micro_patente, pas_cli_Dni, pas_compra_Id, pas_precio)
+/*INSERT INTO DATACENTER.Pasaje(pas_cod, pas_nro_butaca, pas_micro_patente, pas_cli_Dni, pas_compra_Id, pas_precio)
 	SELECT M.Pasaje_Codigo, M.Butaca_Nro, M.Micro_Patente, M.Cli_Dni, (SELECT  TOP 1 C.comp_Id FROM DATACENTER.Compra C WHERE C.comp_comprador_Dni = M.Cli_Dni), M.Pasaje_Precio 
 	  FROM gd_esquema.Maestra M 
 	  WHERE Pasaje_Codigo <> 0
 	  ORDER BY  Pasaje_Codigo, Cli_Dni
+GO*/
+
+/*UNA VEZ MIGRADO PASAJE Y PAQUETE SE ELÍMINA LA COLUMNA DE MAS DE COMPRA
+ALTER TABLE DATACENTER.Compra
+DROP COLUMN comp_Codigo_Pas_Paq
 GO
+*/
