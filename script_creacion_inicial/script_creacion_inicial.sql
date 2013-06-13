@@ -464,12 +464,12 @@ GO
 
 /*------------------------------------------------------------------*/
 /*----------------MIGRACION DE PASAJE-------------------------------*/
-/*INSERT INTO DATACENTER.Pasaje(pas_cod, pas_nro_butaca, pas_micro_patente, pas_cli_Dni, pas_compra_Id, pas_precio)
-	SELECT M.Pasaje_Codigo, M.Butaca_Nro, M.Micro_Patente, M.Cli_Dni, (SELECT  TOP 1 C.comp_Id FROM DATACENTER.Compra C WHERE C.comp_comprador_Dni = M.Cli_Dni), M.Pasaje_Precio 
-	  FROM gd_esquema.Maestra M 
-	  WHERE Pasaje_Codigo <> 0
-	  ORDER BY  Pasaje_Codigo, Cli_Dni
-GO*/
+INSERT INTO DATACENTER.Pasaje(pas_cod, pas_nro_butaca, pas_micro_patente, pas_cli_Dni, pas_compra_Id, pas_precio)
+	SELECT M.Pasaje_Codigo, M.Butaca_Nro, M.Micro_Patente, M.Cli_Dni, C.comp_Id, M.Pasaje_Precio 
+ 	FROM gd_esquema.Maestra M join DATACENTER.Compra C on M.Cli_Dni = C.comp_comprador_Dni AND  C.comp_cant_pasajes = 1 AND C.comp_Codigo_Pas_Paq = M.Pasaje_Codigo
+ 	ORDER BY  Pasaje_Codigo, Cli_Dni, C.comp_Id
+GO
+
 
 /*UNA VEZ MIGRADO PASAJE Y PAQUETE SE ELÍMINA LA COLUMNA DE MAS DE COMPRA
 ALTER TABLE DATACENTER.Compra
