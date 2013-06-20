@@ -76,7 +76,6 @@ CREATE TABLE DATACENTER.Canje
 (canj_id int IDENTITY (1,1) NOT NULL,
 canj_cli_dni numeric (18,0) NOT NULL,
 canj_prem_id int NOT NULL,
-canj_cant_retirada int  NULL,
 canj_fecha datetime NULL
 PRIMARY KEY (canj_id),
 FOREIGN KEY (canj_cli_dni) REFERENCES DATACENTER.Cliente (cli_dni)
@@ -101,6 +100,7 @@ GO
 CREATE TABLE DATACENTER.PremioPorCanje
 (premxCanj_canj_id int NOT NULL,
 premxCanj_prem_id int NOT NULL,
+canj_cant_retirada int  NULL,
 FOREIGN KEY (premxCanj_canj_id) REFERENCES DATACENTER.Canje (canj_id),
 FOREIGN KEY (premxCanj_prem_id) REFERENCES DATACENTER.Premio (prem_id),
 PRIMARY KEY (premxCanj_canj_id, premxCanj_prem_id)
@@ -130,8 +130,7 @@ GO
 /*---------------------CREAMOS TABLA CIUDAD-------------------------*/
 
 CREATE TABLE DATACENTER.Ciudad
-(ciu_nombre nvarchar(255) NOT NULL PRIMARY KEY,
-ciu_id int IDENTITY (1,1) NOT NULL)
+(ciu_nombre nvarchar(255) NOT NULL PRIMARY KEY)
 GO
 
 /*------------------------------------------------------------------*/
