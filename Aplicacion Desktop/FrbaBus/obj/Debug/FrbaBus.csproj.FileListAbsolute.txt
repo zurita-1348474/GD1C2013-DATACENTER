@@ -9,3 +9,12 @@ C:\Users\Franco\Documents\FACU\Gestión de Datos\TP FRBABUS 1.3 - 1C 2013\Aplica
 C:\Users\Franco\Documents\FACU\Gestión de Datos\TP FRBABUS 1.3 - 1C 2013\Aplicacion Desktop2008\FrbaBus\obj\Debug\FrbaBus.Abm_Rol.Abm_Rol_Alta.resources
 C:\Users\Franco\Documents\Repo_GitHub\GD1C2013-DATACENTER\Aplicacion Desktop2008\FrbaBus\obj\Debug\FrbaBus.exe
 C:\Users\Franco\Documents\Repo_GitHub\GD1C2013-DATACENTER\Aplicacion Desktop2008\FrbaBus\obj\Debug\FrbaBus.pdb
+C:\Users\Franco\Documents\Repo_GitHub\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.exe
+C:\Users\Franco\Documents\Repo_GitHub\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.pdb
+C:\Users\Franco\Documents\Repo_GitHub\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\bin\Debug\FrbaBus.exe
+C:\Users\Franco\Documents\Repo_GitHub\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\bin\Debug\FrbaBus.pdb
+C:\Users\Franco\Documents\Repo_GitHub\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Franco\Documents\Repo_GitHub\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Abm_Rol.Abm_Rol_Alta.resources
+C:\Users\Franco\Documents\Repo_GitHub\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Form1.resources
+C:\Users\Franco\Documents\Repo_GitHub\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Properties.Resources.resources
+C:\Users\Franco\Documents\Repo_GitHub\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.csproj.GenerateResource.Cache

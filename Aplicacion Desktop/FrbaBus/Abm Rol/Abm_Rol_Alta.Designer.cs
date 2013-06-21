@@ -88,6 +88,7 @@
             this.butt_add.TabIndex = 5;
             this.butt_add.Text = "Agregar";
             this.butt_add.UseVisualStyleBackColor = true;
+            this.butt_add.Click += new System.EventHandler(this.butt_add_Click);
             // 
             // Abm_Rol_Alta
             // 
