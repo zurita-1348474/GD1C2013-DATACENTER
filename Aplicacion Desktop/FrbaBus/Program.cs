@@ -15,9 +15,9 @@ namespace FrbaBus
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Form1());
-            //Corremos abm_rol para testear
-            Application.Run(new Abm_Rol.Abm_Rol_Alta());
+            Application.Run(new FormCompra());
+            
+           
         }
     }
 }

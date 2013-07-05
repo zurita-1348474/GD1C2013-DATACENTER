@@ -1,6 +1,6 @@
 ﻿namespace FrbaBus
 {
-    partial class Form1
+    partial class FormCompra
     {
         /// <summary>
         /// Required designer variable.
@@ -28,20 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.acceder_button = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // Form1
+            // acceder_button
+            // 
+            this.acceder_button.Location = new System.Drawing.Point(394, 12);
+            this.acceder_button.Name = "acceder_button";
+            this.acceder_button.Size = new System.Drawing.Size(118, 32);
+            this.acceder_button.TabIndex = 0;
+            this.acceder_button.Text = "Login";
+            this.acceder_button.UseVisualStyleBackColor = true;
+            this.acceder_button.Click += new System.EventHandler(this.acceder_button_Click);
+            // 
+            // FormCompra
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(540, 277);
+            this.Controls.Add(this.acceder_button);
+            this.Name = "FormCompra";
+            this.Text = "Compra";
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.Button acceder_button;
+
 
     }
 }

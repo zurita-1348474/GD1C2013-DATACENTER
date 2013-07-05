@@ -15,6 +15,8 @@ C:\Users\Franco\Documents\Repo_GitHub\GD1C2013-DATACENTER\Aplicacion Desktop\Frb
 C:\Users\Franco\Documents\Repo_GitHub\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\bin\Debug\FrbaBus.pdb
 C:\Users\Franco\Documents\Repo_GitHub\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\Franco\Documents\Repo_GitHub\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Abm_Rol.Abm_Rol_Alta.resources
-C:\Users\Franco\Documents\Repo_GitHub\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Form1.resources
 C:\Users\Franco\Documents\Repo_GitHub\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Properties.Resources.resources
 C:\Users\Franco\Documents\Repo_GitHub\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.csproj.GenerateResource.Cache
+C:\Users\Franco\Documents\Repo_GitHub\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Login.login.resources
+C:\Users\Franco\Documents\Repo_GitHub\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.FormAdmin.resources
+C:\Users\Franco\Documents\Repo_GitHub\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.FormCompra.resources

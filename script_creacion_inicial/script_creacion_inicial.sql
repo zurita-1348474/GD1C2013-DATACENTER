@@ -483,3 +483,15 @@ ALTER TABLE DATACENTER.Compra
 DROP COLUMN comp_codigo_pas_paq
 GO
 
+/*-------------------------------------------------------------------*/
+/*-------------------------STORED PROCEDURE--------------------------*/
+
+CREATE PROCEDURE DATACENTER.update_cant_intentos_fallidos @adm_username nvarchar(255), @cant_intentos int
+AS
+BEGIN
+	UPDATE DATACENTER.Administrador
+	SET adm_cant_intentos = @cant_intentos
+	WHERE adm_username = @adm_username
+END
+GO
+
