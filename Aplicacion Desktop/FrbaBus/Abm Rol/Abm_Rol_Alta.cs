@@ -36,10 +36,6 @@ namespace FrbaBus.Abm_Rol
             list_funcionalidades.ValueMember = "func_id";
         }
 
-        private void list_funcionalidades_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void butt_Cleaning_Click(object sender, EventArgs e)
         {
