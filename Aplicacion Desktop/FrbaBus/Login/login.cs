@@ -54,15 +54,16 @@ namespace FrbaBus.Login
                 if (passw_textbox.Text == administrador.Rows[0].ItemArray[1].ToString())
                 {
                     //Row[n] siendo n nro de fila; itemArray[n] siendo n el nro de columna de la fila siendo n>=0
-                    
+
+                    //limpiamos cant_intentos
+                    cant_fallidas = 0;
+                    DataTable retorno_update = procedure.update_cant_intentos_fallidos(username_textbox.Text, cant_fallidas);
 
                     //abrimos el formulario de administradores
                     FormAdmin form_admin = new FormAdmin();
                     form_admin.ShowDialog();
 
-                    //limpiamos cant_intentos
-                    cant_fallidas = 0;
-                    DataTable retorno_update = procedure.update_cant_intentos_fallidos(username_textbox.Text, cant_fallidas);
+                    
                   
                 }
                 else

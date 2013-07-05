@@ -18,7 +18,7 @@ namespace FrbaBus
         public DataTable update_cant_intentos_fallidos(string username, int cant_intentos)
         {
             
-            string query = "EXECUTE update_cant_intentos_fallidos "+
+            string query = "EXECUTE DATACENTER.update_cant_intentos_fallidos "+
                            "'"+username+"',"+
                            cant_intentos.ToString();
             
