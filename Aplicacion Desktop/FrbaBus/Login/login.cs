@@ -38,9 +38,19 @@ namespace FrbaBus.Login
             //el administrador ingreso usuario y contraseña 
             connection conexion = new connection();
 
-            DataTable administrador = conexion.execute_query("SELECT adm_username, adm_password, adm_cant_intentos FROM DATACENTER.Administrador WHERE adm_username= " + "'" + username_textbox.Text + "'");
+
+            DataTable administrador = conexion.execute_query("SELECT adm_username, adm_password, adm_cant_intentos, rol_estado FROM DATACENTER.Administrador  JOIN DATACENTER.Rol  ON (adm_rol_id=rol_id) WHERE adm_username= " + "'" + username_textbox.Text + "'");
+            
+            
             if (administrador.Rows.Count == 1)
             {
+                //verificamos que el Rol administrador NO este inhabilitado
+                if (administrador.Rows[0].ItemArray[3].ToString() != "H")
+                {
+                    MessageBox.Show("ERROR: ROL ADMINISTRADOR INHABILITADO");
+                    return;
+                }
+
                 //existe el usuario sino no me devolveria filas el select; entonces evaluamos la cant_intentos
                 cant_fallidas = Convert.ToInt16(administrador.Rows[0].ItemArray[2].ToString());
                 if ( cant_fallidas == 3)

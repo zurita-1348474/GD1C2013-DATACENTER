@@ -11,6 +11,9 @@ namespace FrbaBus.Abm_Rol
 {
     public partial class Abm_Rol_Alta : Form
     {
+
+        funciones func = new funciones();
+
         public Abm_Rol_Alta()
         {
             InitializeComponent();
@@ -63,8 +66,21 @@ namespace FrbaBus.Abm_Rol
                 MessageBox.Show("ERROR: Debe ingresar un nombre de Rol");
                 return;
             }
+            
+            //controlamos que el nombre de rol ingresado NO este en la base de datos
+            if (func.existe_nombre_rol(name_rol.Text) == true)
+            {
+                MessageBox.Show("Error: Nombre de Rol Existente");
+                return;
+            }
+
+
+
+
             MessageBox.Show("Agregamos Rol");
+
         }
+
 
       
 
