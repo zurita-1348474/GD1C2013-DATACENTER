@@ -346,16 +346,16 @@ GO
 
 ----INSERTAMOS ADMINISTRADORES 
 INSERT INTO DATACENTER.Administrador(adm_username, adm_password, adm_cant_intentos, adm_rol_id)
-VALUES ('frann96','w23e',0,1)
+VALUES ('frann96','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',0,1)
 
 INSERT INTO DATACENTER.Administrador(adm_username, adm_password, adm_cant_intentos, adm_rol_id)
-VALUES ('dieguito12','w23e',0,1)
+VALUES ('dieguito12','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',0,1)
 
 INSERT INTO DATACENTER.Administrador(adm_username, adm_password, adm_cant_intentos, adm_rol_id)
-VALUES ('maty32','w23e',0,1)
+VALUES ('maty32','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',0,1)
 
 INSERT INTO DATACENTER.Administrador(adm_username, adm_password, adm_cant_intentos, adm_rol_id)
-VALUES ('ani18','w23e',0,1)
+VALUES ('ani18','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7',0,1)
 
 
 --AGREGAMOS PREMIOS

@@ -124,6 +124,7 @@
     <Compile Include="FormCompra.Designer.cs">
       <DependentUpon>FormCompra.cs</DependentUpon>
     </Compile>
+    <Compile Include="funciones.cs" />
     <Compile Include="GenerarViaje\Form1.cs">
       <SubType>Form</SubType>
     </Compile>

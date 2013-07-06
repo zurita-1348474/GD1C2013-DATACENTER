@@ -69,7 +69,6 @@
             this.list_funcionalidades.Name = "list_funcionalidades";
             this.list_funcionalidades.Size = new System.Drawing.Size(151, 109);
             this.list_funcionalidades.TabIndex = 3;
-            this.list_funcionalidades.SelectedIndexChanged += new System.EventHandler(this.list_funcionalidades_SelectedIndexChanged);
             // 
             // butt_Cleaning
             // 
