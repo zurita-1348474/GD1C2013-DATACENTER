@@ -70,6 +70,11 @@ namespace FrbaBus.Abm_Rol
             MessageBox.Show("Agregamos Rol");
         }
 
+        private void name_rol_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
       
 
       
