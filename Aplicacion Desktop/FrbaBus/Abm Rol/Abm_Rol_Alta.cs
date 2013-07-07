@@ -81,13 +81,10 @@ namespace FrbaBus.Abm_Rol
 
         }
 
-<<<<<<< HEAD
         private void name_rol_TextChanged(object sender, EventArgs e)
         {
 
         }
-=======
->>>>>>> 700d925ad24caa87922a8d42245536a9ac239b39
 
       
 
