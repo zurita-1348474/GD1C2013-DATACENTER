@@ -29,6 +29,7 @@ namespace FrbaBus.Abm_Micro
             if(funciones.existePatente(textBoxPatente.Text))
             {
                 MessageBox.Show("La patente ingresada ya existe en la Base de Datos");
+                return;
             }
         }
     }
