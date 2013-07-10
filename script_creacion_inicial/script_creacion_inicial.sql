@@ -519,5 +519,21 @@ BEGIN
 END
 GO
 
+CREATE FUNCTION estado_puntos(@inicio datetime, @fin datetime2)
+RETURNS nvarchar(10)
+AS
+BEGIN
+	DECLARE @estado nvarchar(10) = ''
+	IF(DATEDIFF(DD,@inicio,@fin) <= 365)
+	BEGIN
+		SET @estado = 'VIGENTES'
+	END
+	ELSE
+	BEGIN
+		SET @estado = 'VENCIDOS'
+	END
+	RETURN @estado
+END
+GO
 
 

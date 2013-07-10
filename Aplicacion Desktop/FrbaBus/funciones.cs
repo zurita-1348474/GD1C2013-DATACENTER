@@ -49,5 +49,10 @@ namespace FrbaBus
             return existe_rol;
         }
 
+        public bool existeDni(DataTable tabla_puntos)
+        {
+            return tabla_puntos.Rows.Count > 0;
+        }
+
     }
 }
