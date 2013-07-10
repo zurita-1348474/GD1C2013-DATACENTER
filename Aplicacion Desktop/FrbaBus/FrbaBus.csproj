@@ -63,11 +63,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abm Micro\Form1.cs">
+    <Compile Include="Abm Micro\Abm_Micro_Alta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Micro\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Abm Micro\Abm_Micro_Alta.Designer.cs">
+      <DependentUpon>Abm_Micro_Alta.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Permisos\Form1.cs">
       <SubType>Form</SubType>
@@ -139,6 +139,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Abm Micro\Abm_Micro_Alta.resx">
+      <DependentUpon>Abm_Micro_Alta.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Abm Recorrido\Abm_Reco_Alta.resx">
       <DependentUpon>Abm_Reco_Alta.cs</DependentUpon>
     </EmbeddedResource>

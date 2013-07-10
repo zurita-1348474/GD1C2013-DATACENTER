@@ -54,5 +54,13 @@ namespace FrbaBus
             return tabla_puntos.Rows.Count > 0;
         }
 
+        public bool existePatente(string patente)
+        {
+            connection conexion = new connection();
+            string query = "SELECT m.mic_patente FROM DATACENTER.Micro m WHERE m.mic_patente = '"+patente+"'";
+            DataTable tabla_patente = conexion.execute_query(query);
+            return tabla_patente.Rows.Count > 0;
+        }
+
     }
 }

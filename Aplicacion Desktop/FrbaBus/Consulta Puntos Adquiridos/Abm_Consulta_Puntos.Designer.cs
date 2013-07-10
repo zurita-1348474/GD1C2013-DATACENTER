@@ -152,6 +152,7 @@
             // 
             // buttonLimpiar
             // 
+            this.buttonLimpiar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonLimpiar.Location = new System.Drawing.Point(602, 8);
             this.buttonLimpiar.Name = "buttonLimpiar";
             this.buttonLimpiar.Size = new System.Drawing.Size(75, 23);
@@ -162,8 +163,10 @@
             // 
             // Abm_Consulta_Puntos
             // 
+            this.AcceptButton = this.consultarDni;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.buttonLimpiar;
             this.ClientSize = new System.Drawing.Size(769, 289);
             this.Controls.Add(this.buttonLimpiar);
             this.Controls.Add(this.dataGridViewCanjesRealizados);
