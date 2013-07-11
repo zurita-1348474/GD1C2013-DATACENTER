@@ -125,6 +125,7 @@
             this.dniCliente.Name = "dniCliente";
             this.dniCliente.Size = new System.Drawing.Size(201, 20);
             this.dniCliente.TabIndex = 7;
+            this.dniCliente.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dniCliente_KeyPress);
             // 
             // Buscar
             // 
