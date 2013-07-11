@@ -137,10 +137,9 @@ namespace FrbaBus.Canje_de_Ptos
         private void button3_Click(object sender, EventArgs e)
         {
             // Vuelve a la pantallita de formulario para el Administrador
-            
             FormAdmin form_admin = new FormAdmin();
             form_admin.ShowDialog();
-
+            
         }
 
         private void dniCliente_KeyPress(object sender, KeyPressEventArgs e)
