@@ -66,19 +66,6 @@ namespace FrbaBus.Canje_de_Ptos
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            // Se valida el tipo de DNI_Cliente
-            /*string palabraDNI = dniCliente.Text.ToString();
-            if (dniCliente.GetType() == int)
-            {
-                         MessageBox.Show("Metio un int puro");
-                
-            }
-            else
-            {         MessageBox.Show("Metio con caracter");
-                
-            }
-            */
-            // Se realiza el conteo de los puntos que quiere gastar el cliente
             int i;
             int puntosConsumidos = 0;
             for (i = 0; i < tablaPremios.RowCount; i++)
@@ -160,7 +147,5 @@ namespace FrbaBus.Canje_de_Ptos
                     e.Handled = true;
                 } 
         }
-
-       
     }  
 }
