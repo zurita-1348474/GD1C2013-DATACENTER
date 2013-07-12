@@ -29,6 +29,12 @@ namespace FrbaBus.Abm_Micro
 
             char[] caracter = textBoxPatente.Text.ToCharArray();
             int i;
+            if (caracter.Length != 7)
+            {
+                MessageBox.Show("Patente ingresada incorrecta. Se espera que sea de tipo LLLNNN");
+                return;
+            }
+
             for (i = 0;i<3; i++)
             {
                 if (Char.IsDigit(caracter.ElementAt(i)))
