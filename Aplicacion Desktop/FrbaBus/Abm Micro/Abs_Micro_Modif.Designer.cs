@@ -1,6 +1,6 @@
 ﻿namespace FrbaBus.Abm_Micro
 {
-    partial class Form1
+    partial class Abm_Micro_Modif
     {
         /// <summary>
         /// Required designer variable.
@@ -28,37 +28,37 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.labelFechaAlta = new System.Windows.Forms.Label();
             this.labelPatente = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // labelFechaAlta
-            // 
-            this.labelFechaAlta.AutoSize = true;
-            this.labelFechaAlta.Location = new System.Drawing.Point(97, 73);
-            this.labelFechaAlta.Name = "labelFechaAlta";
-            this.labelFechaAlta.Size = new System.Drawing.Size(76, 13);
-            this.labelFechaAlta.TabIndex = 0;
-            this.labelFechaAlta.Text = "Fecha de Alta:";
             // 
             // labelPatente
             // 
             this.labelPatente.AutoSize = true;
-            this.labelPatente.Location = new System.Drawing.Point(13, 53);
+            this.labelPatente.Location = new System.Drawing.Point(24, 31);
             this.labelPatente.Name = "labelPatente";
             this.labelPatente.Size = new System.Drawing.Size(47, 13);
-            this.labelPatente.TabIndex = 1;
+            this.labelPatente.TabIndex = 0;
             this.labelPatente.Text = "Patente:";
             // 
-            // Form1
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(27, 62);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "label1";
+            // 
+            // Abm_Micro_Modif
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.labelPatente);
-            this.Controls.Add(this.labelFechaAlta);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "Abm_Micro_Modif";
+            this.Text = "Modificación Micro";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -66,7 +66,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label labelFechaAlta;
         private System.Windows.Forms.Label labelPatente;
+        private System.Windows.Forms.Label label1;
     }
 }

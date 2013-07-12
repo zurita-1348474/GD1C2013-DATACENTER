@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace FrbaBus.Abm_Micro
 {
-    public partial class Form1 : Form
+    public partial class Abm_Micro_Modif : Form
     {
-        public Form1()
+        public Abm_Micro_Modif()
         {
             InitializeComponent();
         }

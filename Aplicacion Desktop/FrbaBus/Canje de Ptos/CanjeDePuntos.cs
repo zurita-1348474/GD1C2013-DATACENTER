@@ -109,12 +109,12 @@ namespace FrbaBus.Canje_de_Ptos
                         // descuenta stock del premio de la fila
 
                         //consulta a ejecutar para mostrar todas los premios cargados en la tabla
-                        string query4 = "SELECT prem_stock FROM DATACENTER.Premio where prem_nombre='" + tablaPremios.Rows[i].Cells[2].Value.ToString()+"'";
+                        string query4 = "SELECT prem_stock,prem_id FROM DATACENTER.Premio where prem_nombre='" + tablaPremios.Rows[i].Cells[2].Value.ToString()+"'";
 
                         //instanciamos obj de la clase connection y le enviamos la query para que la ejecute
                         connection connect4 = new connection();
-                        DataTable premStock = connect4.execute_query(query4);
-                        int nuevoPremStock = Convert.ToInt32(premStock.Rows[0].ItemArray[0]) - Convert.ToInt32(tablaPremios.Rows[i].Cells[1].Value);
+                        DataTable premioACanjear = connect4.execute_query(query4);
+                        int nuevoPremStock = Convert.ToInt32(premioACanjear.Rows[0].ItemArray[0]) - Convert.ToInt32(tablaPremios.Rows[i].Cells[1].Value);
 
                         if (nuevoPremStock < 0)
                         {
@@ -128,6 +128,13 @@ namespace FrbaBus.Canje_de_Ptos
                         //instanciamos obj de la clase connection y le enviamos la query para que la ejecute
                         connection connect3 = new connection();
                         connect3.execute_query(query3);
+
+                        //consulta a ejecutar para mostrar todas los premios cargados en la tabla
+                        string query5 = "INSERT INTO DATACENTER.Canje(canj_cli_dni,canj_prem_id,canj_cant_retirada,canj_fecha) VALUES ('" + dniCliente.Text.ToString() + "','" + premioACanjear.Rows[0].ItemArray[1].ToString() + "','" + tablaPremios.Rows[i].Cells[1].Value.ToString() + "','" + DateTime.Now.ToString("dd/MM/yyyy")+"')";
+
+                        //instanciamos obj de la clase connection y le enviamos la query para que la ejecute
+                        connection connect5 = new connection();
+                        connect5.execute_query(query5);
 
                     }
                 }

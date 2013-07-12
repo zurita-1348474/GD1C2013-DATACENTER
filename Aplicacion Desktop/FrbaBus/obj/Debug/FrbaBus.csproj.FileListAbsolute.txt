@@ -62,4 +62,4 @@ C:\Users\user\Desktop\Gestión de Datos\SQL-TP\Mi repo-DATACENTER\GD1C2013-DATAC
 C:\Users\user\Desktop\Gestión de Datos\SQL-TP\Mi repo-DATACENTER\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Properties.Resources.resources
 C:\Users\user\Desktop\Gestión de Datos\SQL-TP\Mi repo-DATACENTER\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.csproj.GenerateResource.Cache
 C:\Users\user\Desktop\Gestión de Datos\SQL-TP\Mi repo-DATACENTER\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Abm_Micro.FormButacaAlta.resources
-C:\Users\user\Desktop\Gestión de Datos\SQL-TP\Mi repo-DATACENTER\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Abm_Micro.Form1.resources
+C:\Users\user\Desktop\Gestión de Datos\SQL-TP\Mi repo-DATACENTER\GD1C2013-DATACENTER\Aplicacion Desktop\FrbaBus\obj\Debug\FrbaBus.Abm_Micro.Abm_Micro_Modif.resources
