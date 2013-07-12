@@ -31,6 +31,13 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.consultarDni = new System.Windows.Forms.Button();
             this.labelDni = new System.Windows.Forms.Label();
             this.textBoxDni = new System.Windows.Forms.TextBox();
@@ -41,6 +48,8 @@
             this.dataGridViewPuntosDetallados = new System.Windows.Forms.DataGridView();
             this.dataGridViewCanjesRealizados = new System.Windows.Forms.DataGridView();
             this.buttonLimpiar = new System.Windows.Forms.Button();
+            this.labelPuntosVencidos = new System.Windows.Forms.Label();
+            this.labelResultadoPuntosVencidos = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPuntosDetallados)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCanjesRealizados)).BeginInit();
             this.SuspendLayout();
@@ -67,6 +76,7 @@
             // textBoxDni
             // 
             this.textBoxDni.Location = new System.Drawing.Point(112, 8);
+            this.textBoxDni.MaxLength = 8;
             this.textBoxDni.Name = "textBoxDni";
             this.textBoxDni.Size = new System.Drawing.Size(120, 20);
             this.textBoxDni.TabIndex = 2;
@@ -110,32 +120,8 @@
             // 
             this.dataGridViewPuntosDetallados.AllowUserToAddRows = false;
             this.dataGridViewPuntosDetallados.AllowUserToDeleteRows = false;
-            this.dataGridViewPuntosDetallados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dataGridViewPuntosDetallados.Location = new System.Drawing.Point(12, 83);
-            this.dataGridViewPuntosDetallados.Name = "dataGridViewPuntosDetallados";
-            this.dataGridViewPuntosDetallados.ReadOnly = true;
-            this.dataGridViewPuntosDetallados.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.dataGridViewPuntosDetallados.Size = new System.Drawing.Size(418, 192);
-            this.dataGridViewPuntosDetallados.TabIndex = 7;
-            // 
-            // dataGridViewCanjesRealizados
-            // 
-            this.dataGridViewCanjesRealizados.AllowUserToAddRows = false;
-            this.dataGridViewCanjesRealizados.AllowUserToDeleteRows = false;
-            this.dataGridViewCanjesRealizados.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridViewCanjesRealizados.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
-            this.dataGridViewCanjesRealizados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewCanjesRealizados.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridViewCanjesRealizados.Location = new System.Drawing.Point(447, 83);
-            this.dataGridViewCanjesRealizados.Name = "dataGridViewCanjesRealizados";
-            this.dataGridViewCanjesRealizados.ReadOnly = true;
+            this.dataGridViewPuntosDetallados.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -143,10 +129,72 @@
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewCanjesRealizados.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridViewCanjesRealizados.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.dataGridViewPuntosDetallados.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridViewPuntosDetallados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewCanjesRealizados.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewPuntosDetallados.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridViewPuntosDetallados.Location = new System.Drawing.Point(12, 83);
+            this.dataGridViewPuntosDetallados.Name = "dataGridViewPuntosDetallados";
+            this.dataGridViewPuntosDetallados.ReadOnly = true;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewPuntosDetallados.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dataGridViewPuntosDetallados.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewPuntosDetallados.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            this.dataGridViewPuntosDetallados.Size = new System.Drawing.Size(418, 192);
+            this.dataGridViewPuntosDetallados.TabIndex = 7;
+            // 
+            // dataGridViewCanjesRealizados
+            // 
+            this.dataGridViewCanjesRealizados.AllowUserToAddRows = false;
+            this.dataGridViewCanjesRealizados.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewCanjesRealizados.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
+            this.dataGridViewCanjesRealizados.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewCanjesRealizados.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewCanjesRealizados.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            this.dataGridViewCanjesRealizados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewCanjesRealizados.DefaultCellStyle = dataGridViewCellStyle8;
+            this.dataGridViewCanjesRealizados.Location = new System.Drawing.Point(447, 83);
+            this.dataGridViewCanjesRealizados.Name = "dataGridViewCanjesRealizados";
+            this.dataGridViewCanjesRealizados.ReadOnly = true;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewCanjesRealizados.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            this.dataGridViewCanjesRealizados.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewCanjesRealizados.RowsDefaultCellStyle = dataGridViewCellStyle10;
             this.dataGridViewCanjesRealizados.Size = new System.Drawing.Size(310, 192);
             this.dataGridViewCanjesRealizados.TabIndex = 8;
             // 
@@ -161,6 +209,23 @@
             this.buttonLimpiar.UseVisualStyleBackColor = true;
             this.buttonLimpiar.Click += new System.EventHandler(this.buttonLimpiar_Click);
             // 
+            // labelPuntosVencidos
+            // 
+            this.labelPuntosVencidos.AutoSize = true;
+            this.labelPuntosVencidos.Location = new System.Drawing.Point(244, 35);
+            this.labelPuntosVencidos.Name = "labelPuntosVencidos";
+            this.labelPuntosVencidos.Size = new System.Drawing.Size(93, 13);
+            this.labelPuntosVencidos.TabIndex = 10;
+            this.labelPuntosVencidos.Text = "Puntos Vencidos: ";
+            // 
+            // labelResultadoPuntosVencidos
+            // 
+            this.labelResultadoPuntosVencidos.AutoSize = true;
+            this.labelResultadoPuntosVencidos.Location = new System.Drawing.Point(372, 35);
+            this.labelResultadoPuntosVencidos.Name = "labelResultadoPuntosVencidos";
+            this.labelResultadoPuntosVencidos.Size = new System.Drawing.Size(0, 13);
+            this.labelResultadoPuntosVencidos.TabIndex = 11;
+            // 
             // Abm_Consulta_Puntos
             // 
             this.AcceptButton = this.consultarDni;
@@ -168,6 +233,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonLimpiar;
             this.ClientSize = new System.Drawing.Size(769, 289);
+            this.Controls.Add(this.labelResultadoPuntosVencidos);
+            this.Controls.Add(this.labelPuntosVencidos);
             this.Controls.Add(this.buttonLimpiar);
             this.Controls.Add(this.dataGridViewCanjesRealizados);
             this.Controls.Add(this.dataGridViewPuntosDetallados);
@@ -199,5 +266,7 @@
         private System.Windows.Forms.DataGridView dataGridViewPuntosDetallados;
         private System.Windows.Forms.DataGridView dataGridViewCanjesRealizados;
         private System.Windows.Forms.Button buttonLimpiar;
+        private System.Windows.Forms.Label labelPuntosVencidos;
+        private System.Windows.Forms.Label labelResultadoPuntosVencidos;
     }
 }
