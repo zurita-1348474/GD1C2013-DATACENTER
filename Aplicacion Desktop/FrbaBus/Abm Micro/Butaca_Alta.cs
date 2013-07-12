@@ -27,10 +27,10 @@ namespace FrbaBus.Abm_Micro
             tablaButacas1.Columns.Add("tipo_butaca", typeof(string));
             
             DataRow filaButacas1 = tablaButacas1.NewRow();
-            filaButacas1["tipo_butaca"]= "V";
+            filaButacas1["tipo_butaca"]= "Ventanilla";
             tablaButacas1.Rows.Add(filaButacas1);
             DataRow filaButacas2 = tablaButacas1.NewRow();
-            filaButacas2["tipo_butaca"] = "P";
+            filaButacas2["tipo_butaca"] = "Pasillo";
             tablaButacas1.Rows.Add(filaButacas2);
             ButacaTipo.DataSource = tablaButacas1;
             ButacaTipo.DisplayMember = "tipo_butaca";
@@ -59,18 +59,26 @@ namespace FrbaBus.Abm_Micro
         private void buttonAceptar_Click(object sender, EventArgs e)
         {
             int i;
-            for (i = 0; i<dataGridViewButacas.RowCount; i++)
+            try
             {
-                //consulta a ejecutar para registrar nueva butaca
-                string query1 = "INSERT INTO DATACENTER.Butaca(but_nro,but_mic_patente,but_tipo,but_piso) VALUES ('"+
-                                dataGridViewButacas.Rows[i].Cells[0].Value.ToString()+"','"+patente+"','"+dataGridViewButacas.Rows[i].Cells[1].Value.ToString()+"','"+dataGridViewButacas.Rows[i].Cells[2].Value.ToString()+"')";
-                
-                //instanciamos obj de la clase connection y le enviamos la query para que la ejecute
-                connection connect1 = new connection();
-                connect1.execute_query(query1);
-                
-            }
+                for (i = 0; i < dataGridViewButacas.RowCount; i++)
+                {
 
+                    //consulta a ejecutar para registrar nueva butaca
+                    string query1 = "INSERT INTO DATACENTER.Butaca(but_nro,but_mic_patente,but_tipo,but_piso) VALUES ('" +
+                                    dataGridViewButacas.Rows[i].Cells[0].Value.ToString() + "','" + patente + "','" + dataGridViewButacas.Rows[i].Cells[1].Value.ToString() + "','" + dataGridViewButacas.Rows[i].Cells[2].Value.ToString() + "')";
+
+                    //instanciamos obj de la clase connection y le enviamos la query para que la ejecute
+                    connection connect1 = new connection();
+                    connect1.execute_query(query1);
+                
+                }
+            }
+            catch(NullReferenceException)
+            {
+                MessageBox.Show("Debe cargar todas las butacas");
+                return;
+            }
             MessageBox.Show("El ingreso de Butacas se ha realizado con éxito.");
             this.Close();
 
