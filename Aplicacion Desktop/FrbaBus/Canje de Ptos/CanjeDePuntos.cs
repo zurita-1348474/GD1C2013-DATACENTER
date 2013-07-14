@@ -23,16 +23,6 @@ namespace FrbaBus.Canje_de_Ptos
 
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
             if (dniCliente.Text == "")
@@ -90,7 +80,9 @@ namespace FrbaBus.Canje_de_Ptos
             //instanciamos obj de la clase connection y le enviamos la query para que la ejecute
             connection connect1 = new connection();
             DataTable puntosAcumulados = connect1.execute_query(query1);
-
+            
+            string idCanjeNuevo= "0";
+            
             if (puntosConsumidos <= Convert.ToInt16(puntosAcumulados.Rows[0].ItemArray[0]))
             {
                 int puntosTotAcum = (Convert.ToInt16(puntosAcumulados.Rows[0].ItemArray[0]) - puntosConsumidos);
@@ -100,6 +92,20 @@ namespace FrbaBus.Canje_de_Ptos
                 //instanciamos obj de la clase connection y le enviamos la query para que la ejecute
                 connection connect2 = new connection();
                 connect2.execute_query(query2);
+
+                //consulta a ejecutar para mostrar todas los premios cargados en la tabla
+                string query5 = "SELECT max(canj_id) FROM DATACENTER.Canje";
+
+                //instanciamos obj de la clase connection y le enviamos la query para que la ejecute
+                connection connect5 = new connection();
+                DataTable idCanje = connect5.execute_query(query5);
+                string idCanjeUltimo = idCanje.Rows[0].ItemArray[0].ToString();
+
+                if (idCanjeUltimo != null)
+                {
+                    int nroCanjeNuevo = Convert.ToInt32(idCanjeUltimo)+1;
+                    idCanjeNuevo= Convert.ToString(nroCanjeNuevo);
+                }
 
                 // se actualiza el stock de los premios
                 for (i = 0; i < tablaPremios.RowCount; i++)
@@ -130,11 +136,12 @@ namespace FrbaBus.Canje_de_Ptos
                         connect3.execute_query(query3);
 
                         //consulta a ejecutar para mostrar todas los premios cargados en la tabla
-                        string query5 = "INSERT INTO DATACENTER.Canje(canj_cli_dni,canj_prem_id,canj_cant_retirada,canj_fecha) VALUES ('" + dniCliente.Text.ToString() + "','" + premioACanjear.Rows[0].ItemArray[1].ToString() + "','" + tablaPremios.Rows[i].Cells[1].Value.ToString() + "','" + DateTime.Now.ToString("yyyy/MM/dd")+"')";
+                        string query6 = "INSERT INTO DATACENTER.Canje(canj_id,canj_cli_dni,canj_prem_id,canj_cant_retirada,canj_fecha) VALUES ('"+
+                                        idCanjeNuevo +"','"+ dniCliente.Text.ToString() + "','" + premioACanjear.Rows[0].ItemArray[1].ToString() + "','" + tablaPremios.Rows[i].Cells[1].Value.ToString() + "','" + DateTime.Now.ToString("yyyy/MM/dd")+"')";
 
                         //instanciamos obj de la clase connection y le enviamos la query para que la ejecute
-                        connection connect5 = new connection();
-                        connect5.execute_query(query5);
+                        connection connect6 = new connection();
+                        connect6.execute_query(query6);
 
                     }
                 }

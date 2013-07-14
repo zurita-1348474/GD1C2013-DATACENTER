@@ -68,13 +68,23 @@ namespace FrbaBus.Abm_Micro
                 MessageBox.Show("ERROR: La fecha de baja no puede ser anterior a la de reingreso.");
                 return;
             }
-            
+
+
             //Chequea si existen viajes ya asignados a ese micro
 
             //preparar patente para poder registrar nuevo micro
             string primerPartePatente = textBoxPatente.Text.Substring(0, 3);
             string segundaPartePatente = textBoxPatente.Text.Substring(3, 3);
             string nroPatente = primerPartePatente + "-" + segundaPartePatente;
+
+
+            //consulta a ejecutar para saber si existen viajes asociados al micro
+            string query3 = "SELECT * FROM DATACENTER.EstadoMicro where est_mic_patente='" + nroPatente + "'";
+
+            //instanciamos obj de la clase connection y le enviamos la query para que la ejecute
+            connection connect3 = new connection();
+            DataTable estadosDelMicro = connect3.execute_query(query3);
+
 
             //consulta a ejecutar para saber si existen viajes asociados al micro
             string query1 = "SELECT count(*) FROM DATACENTER.Viaje where viaj_mic_patente='" + nroPatente + "'";
