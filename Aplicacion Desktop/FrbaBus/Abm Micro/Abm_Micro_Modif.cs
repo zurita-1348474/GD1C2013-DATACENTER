@@ -21,11 +21,6 @@ namespace FrbaBus.Abm_Micro
 
         private void buttonAceptar_Click(object sender, EventArgs e)
         {
-            /*
-                FALTA HACER UN CONTROL PARA SABER SI EL MICRO NO ESTÁ YA EN REPARACIÓN PARA
-                LAS FECHAS QUE SE INGRESARON RECIENTEMENTE. SERÍA UN ERROR Y NO SE DEBERÍA
-                PERMITIR QUE CONTINUE CON LA OPERACIÓN
-            */
             if (textBoxPatente.Text == "")
             {
                 MessageBox.Show("Debe ingresar una Patente");
@@ -70,6 +65,7 @@ namespace FrbaBus.Abm_Micro
             }
 
 
+
             //Chequea si existen viajes ya asignados a ese micro
 
             //preparar patente para poder registrar nuevo micro
@@ -85,6 +81,26 @@ namespace FrbaBus.Abm_Micro
             connection connect3 = new connection();
             DataTable estadosDelMicro = connect3.execute_query(query3);
 
+            for(i=0;i<estadosDelMicro.Rows.Count;i++)
+            {
+                if (Convert.ToDateTime(dateTimePickerFechaBajaTemporaria.Value.ToString()) >= Convert.ToDateTime(estadosDelMicro.Rows[i].ItemArray[2].ToString()))
+                {
+                    if (Convert.ToDateTime(dateTimePickerFechaBajaTemporaria.Value.ToString()) <= Convert.ToDateTime(estadosDelMicro.Rows[i].ItemArray[3].ToString()))
+                    {
+                        MessageBox.Show("ERROR: Para ese rango de fechas ya se registra una baja del micro");
+                        return;
+                    }
+                }
+
+                if (Convert.ToDateTime(dateTimePickerFechaReingreso.Value.ToString()) >= Convert.ToDateTime(estadosDelMicro.Rows[i].ItemArray[2].ToString()))
+                {
+                    if (Convert.ToDateTime(dateTimePickerFechaReingreso.Value.ToString()) <= Convert.ToDateTime(estadosDelMicro.Rows[i].ItemArray[3].ToString()))
+                    {
+                        MessageBox.Show("ERROR: Para ese rango de fechas ya se registra una baja del micro");
+                        return;
+                    }
+                }
+            }
 
             //consulta a ejecutar para saber si existen viajes asociados al micro
             string query1 = "SELECT count(*) FROM DATACENTER.Viaje where viaj_mic_patente='" + nroPatente + "'";

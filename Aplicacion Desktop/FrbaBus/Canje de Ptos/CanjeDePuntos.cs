@@ -101,7 +101,7 @@ namespace FrbaBus.Canje_de_Ptos
                 DataTable idCanje = connect5.execute_query(query5);
                 string idCanjeUltimo = idCanje.Rows[0].ItemArray[0].ToString();
 
-                if (idCanjeUltimo != null)
+                if (idCanjeUltimo != "")
                 {
                     int nroCanjeNuevo = Convert.ToInt32(idCanjeUltimo)+1;
                     idCanjeNuevo= Convert.ToString(nroCanjeNuevo);

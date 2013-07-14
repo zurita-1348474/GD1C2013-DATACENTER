@@ -21,11 +21,6 @@ namespace FrbaBus.Abm_Micro
   
         private void buttonAceptar_Click(object sender, EventArgs e)
         {
-            /*
-                FALTA HACER UN CONTROL PARA SABER SI EL MICRO NO ESTÁ YA EN REPARACIÓN PARA
-                LAS FECHAS QUE SE INGRESARON RECIENTEMENTE. SERÍA UN ERROR Y NO SE DEBERÍA
-                PERMITIR QUE CONTINUE CON LA OPERACIÓN
-            */
             if (textBoxPatente.Text == "")
             {
                 MessageBox.Show("Debe ingresar una Patente");
@@ -70,6 +65,19 @@ namespace FrbaBus.Abm_Micro
             string primerPartePatente = textBoxPatente.Text.Substring(0, 3);
             string segundaPartePatente = textBoxPatente.Text.Substring(3, 3);
             string nroPatente = primerPartePatente + "-" + segundaPartePatente;
+
+            //consulta a ejecutar para saber si existen viajes asociados al micro
+            string query3 = "SELECT mic_fecha_baja_def FROM DATACENTER.Micro where mic_patente='" + nroPatente + "'";
+
+            //instanciamos obj de la clase connection y le enviamos la query para que la ejecute
+            connection connect3 = new connection();
+            DataTable fechaBajaDefinitiva = connect3.execute_query(query3);
+            
+            if (Convert.ToDateTime(dateTimePickerFechaBajaDefinitiva.Value.ToString()) >= Convert.ToDateTime(fechaBajaDefinitiva.Rows[0].ItemArray[0].ToString()))
+                {
+                    MessageBox.Show("ERROR: Para esa fecha el micro ya está dado de baja.");
+                    return;
+                }
 
             //consulta a ejecutar para saber si existen viajes asociados al micro
             string query1 = "SELECT count(*) FROM DATACENTER.Viaje where viaj_mic_patente='" + nroPatente + "'";
