@@ -94,7 +94,7 @@ namespace FrbaBus.Abm_Micro
 
             //consulta a ejecutar para registrar nuevo micro
             string query3 = "INSERT INTO DATACENTER.Micro(mic_patente, mic_marc_id, mic_serv_id, mic_cant_butacas, mic_cant_kg_disponibles, mic_modelo, mic_fecha_alta, mic_fecha_baja_def) VALUES ('"+
-                            nroPatente + "','" + idMarca.Rows[0].ItemArray[0].ToString() + "','" + idServ.Rows[0].ItemArray[0].ToString() + "','" + textBoxCButacas.Text.ToString() + "','" + textBoxCKGDisp.Text.ToString() + "','" + textBoxModelo.Text.ToString() + "','" + dateTimePickerFechaAlta.Value.ToString("dd/MM/yyyy") + "',NULL)";
+                            nroPatente + "','" + idMarca.Rows[0].ItemArray[0].ToString() + "','" + idServ.Rows[0].ItemArray[0].ToString() + "','" + textBoxCButacas.Text.ToString() + "','" + textBoxCKGDisp.Text.ToString() + "','" + textBoxModelo.Text.ToString() + "','" + dateTimePickerFechaAlta.Value.ToString("yyyy/MM/dd") + "',NULL)";
 
             //instanciamos obj de la clase connection y le enviamos la query para que la ejecute
             connection connect3 = new connection();
@@ -104,9 +104,8 @@ namespace FrbaBus.Abm_Micro
 
             // Se redirecciona al formulario de alta de butacas
             FormButacaAlta butaca_Alta = new FormButacaAlta();
-            butaca_Alta.patente = nroPatente;
-            butaca_Alta.cantButacas = Convert.ToInt32(textBoxCButacas.Text);
-            butaca_Alta.Show();
+            butaca_Alta.pasaDatosMicro(Convert.ToInt32(textBoxCButacas.Text), nroPatente);
+            butaca_Alta.ShowDialog();
             
             // Limpiar campos
             this.textBoxPatente.Clear();
