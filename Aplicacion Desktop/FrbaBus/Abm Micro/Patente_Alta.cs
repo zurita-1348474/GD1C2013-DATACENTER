@@ -12,7 +12,6 @@ namespace FrbaBus.Abm_Micro
     public partial class Patente_Alta : Form
     {
         private funciones funciones;
-        private DataTable caractMicroNuevo;
         private string patenteAReemplazar;
         private DateTimePicker fechaFServ;
         private DateTimePicker fechaRein;
@@ -23,9 +22,8 @@ namespace FrbaBus.Abm_Micro
             this.funciones = new funciones();    
         }
 
-        internal void pasaCaracteristicas(DataTable caractMicro, String patAReemplazar, DateTimePicker fechaFS, DateTimePicker fechaR)
+        internal void pasaCaracteristicas(String patAReemplazar, DateTimePicker fechaFS, DateTimePicker fechaR)
         {
-            caractMicroNuevo = caractMicro;
             patenteAReemplazar = patAReemplazar;
             fechaFServ = fechaFS;
             fechaRein = fechaR;
@@ -75,15 +73,12 @@ namespace FrbaBus.Abm_Micro
             string segundaPartePatente = textBoxPatente.Text.Substring(3, 3);
             string nroPatente = primerPartePatente + "-" + segundaPartePatente;
 
-            //consulta a ejecutar para registrar nuevo micro
-            string query1 = "INSERT INTO DATACENTER.Micro(mic_patente, mic_marc_id, mic_serv_id, mic_cant_butacas, mic_cant_kg_disponibles, mic_modelo, mic_fecha_alta, mic_fecha_baja_def) VALUES ('" +
-                            nroPatente + "','" + caractMicroNuevo.Rows[0].ItemArray[0].ToString() + "','" + caractMicroNuevo.Rows[0].ItemArray[1].ToString() + "','" + caractMicroNuevo.Rows[0].ItemArray[2].ToString() + "','" + caractMicroNuevo.Rows[0].ItemArray[3].ToString() + "','" + caractMicroNuevo.Rows[0].ItemArray[4].ToString() + "','" + DateTime.Now.ToString("yyyy/MM/dd") + "',NULL)";
+            string query1 = "exec DATACENTER.registrarNuevoMicro '" + nroPatente + "','" + patenteAReemplazar + "'";
             connection connect1 = new connection();
             connect1.execute_query(query1);
 
             MessageBox.Show("El ingreso de Micro se ha realizado con éxito.");
-
-
+            
             
             // Proceder al cambio de micro efectivo en los registros de los viajes que corresponda
 

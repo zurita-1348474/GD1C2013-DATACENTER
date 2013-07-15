@@ -29,25 +29,26 @@ namespace FrbaBus.Abm_Micro
 
         private void buttonSustituir_Click(object sender, EventArgs e)
         {
-            //consulta a ejecutar para conocer las características del micro que se quiere dar de baja
-            string query1 = "SELECT mic_marc_id, mic_serv_id, mic_cant_butacas, mic_cant_kg_disponibles, mic_modelo FROM DATACENTER.Micro where mic_patente='" + patenteConGuion +"'";
+            // consulta a ejecutar para saber si hay micro disponible
+            string query1;
+            if (fechaReing != null)
+            {
+                query1 = "SELECT DATACENTER.microDisponible('" + patenteConGuion + "','" + fechaFueraServ.Value.ToString("yyy/MM/dd") + "','" + fechaReing.Value.ToString("yyy/MM/dd") + "')";
+            }
+            else
+            {
+                query1 = "SELECT DATACENTER.microDisponible('" + patenteConGuion + "','" + fechaFueraServ.Value.ToString("yyy/MM/dd") + "','" + null + "')";
+            }
             connection connect1 = new connection();
-            DataTable caracteristicasMicro = connect1.execute_query(query1);
+            DataTable microReemplazante = connect1.execute_query(query1);
 
-            //consulta a ejecutar para conocer las características del micro que se quiere dar de baja
-            string query2 = "SELECT top 1 mic_patente FROM DATACENTER.Micro where mic_patente<>'" + patenteConGuion 
-                            + "' and mic_marc_id="+caracteristicasMicro.Rows[0].ItemArray[0].ToString()+" and mic_serv_id="
-                            +caracteristicasMicro.Rows[0].ItemArray[1].ToString()+" and mic_cant_butacas>="+caracteristicasMicro.Rows[0].ItemArray[2].ToString();
-            connection connect2 = new connection();
-            DataTable microReemplazante = connect2.execute_query(query2);
-
-            if (microReemplazante.Rows.Count == 0)
+            if (microReemplazante.Rows[0].ItemArray[0].ToString() == "")
             {
                 //Ingreso nuevo micro que cumpla las mismas características debido que no existe uno que lo reemplace en la BD
 
                 // Direcciona a formulario de ingreso de nuevo micro con similares características
                 Patente_Alta form_PatenteAlta = new Patente_Alta();
-                form_PatenteAlta.pasaCaracteristicas(caracteristicasMicro, patenteConGuion, fechaFueraServ, fechaReing);
+                form_PatenteAlta.pasaCaracteristicas(patenteConGuion, fechaFueraServ, fechaReing);
                 form_PatenteAlta.ShowDialog();
             
             }
@@ -73,6 +74,17 @@ namespace FrbaBus.Abm_Micro
                 this.Close();
 
             }
+        }
+
+        private void buttonCancelar_Click(object sender, EventArgs e)
+        {
+
+
+
+            MessageBox.Show("Los viajes se han cancelado con éxito.");
+
+            this.Close();
+
         }
     }
 }

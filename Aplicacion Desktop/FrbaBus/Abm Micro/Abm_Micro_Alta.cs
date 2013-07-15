@@ -174,5 +174,10 @@ namespace FrbaBus.Abm_Micro
             comboBoxMarca.ValueMember = "marc_nombre";
 
         }
+
+        private void buttonCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

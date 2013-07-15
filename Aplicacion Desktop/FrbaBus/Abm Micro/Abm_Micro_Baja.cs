@@ -65,16 +65,15 @@ namespace FrbaBus.Abm_Micro
             string segundaPartePatente = textBoxPatente.Text.Substring(3, 3);
             string nroPatente = primerPartePatente + "-" + segundaPartePatente;
 
-            //consulta a ejecutar para saber si ya se había pautado una fecha anterior de baja definitiva
-            string query3 = "SELECT mic_fecha_baja_def FROM DATACENTER.Micro where mic_patente='" + nroPatente + "'";
+            string query3 = "SELECT DATACENTER.estadoBaja('"+dateTimePickerFechaBajaDefinitiva.Value.ToString("yyyy/MM/dd")+"','"+nroPatente+"')";
             connection connect3 = new connection();
-            DataTable fechaBajaDefinitiva = connect3.execute_query(query3);
+            DataTable estadoBajaMicro = connect3.execute_query(query3);
             
-            if (Convert.ToDateTime(dateTimePickerFechaBajaDefinitiva.Value.ToString()) >= Convert.ToDateTime(fechaBajaDefinitiva.Rows[0].ItemArray[0].ToString()))
-                {
-                    MessageBox.Show("ERROR: Para esa fecha el micro ya está dado de baja.");
-                    return;
-                }
+            if (estadoBajaMicro.Rows[0].ItemArray[0].ToString() != "0")
+            {
+                MessageBox.Show("ERROR: Para esa fecha el micro ya está dado de baja.");
+                return;
+            }
 
             //consulta a ejecutar para saber si existen viajes asociados al micro
             string query1 = "SELECT count(*) FROM DATACENTER.Viaje where viaj_mic_patente='" + nroPatente + "'";
@@ -99,6 +98,11 @@ namespace FrbaBus.Abm_Micro
                 form_OpPorConcretar.pasaPatente(nroPatente, dateTimePickerFechaBajaDefinitiva, null);
                 form_OpPorConcretar.ShowDialog();
             }
+        }
+
+        private void buttonCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
