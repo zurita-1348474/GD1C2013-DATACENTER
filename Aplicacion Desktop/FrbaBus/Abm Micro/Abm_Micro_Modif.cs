@@ -64,8 +64,6 @@ namespace FrbaBus.Abm_Micro
                 return;
             }
 
-
-
             //Chequea si existen viajes ya asignados a ese micro
 
             //preparar patente para poder registrar nuevo micro
@@ -76,8 +74,6 @@ namespace FrbaBus.Abm_Micro
 
             //consulta a ejecutar para saber si existen viajes asociados al micro
             string query3 = "SELECT * FROM DATACENTER.EstadoMicro where est_mic_patente='" + nroPatente + "'";
-
-            //instanciamos obj de la clase connection y le enviamos la query para que la ejecute
             connection connect3 = new connection();
             DataTable estadosDelMicro = connect3.execute_query(query3);
 
@@ -104,16 +100,12 @@ namespace FrbaBus.Abm_Micro
 
             //consulta a ejecutar para saber si existen viajes asociados al micro
             string query1 = "SELECT count(*) FROM DATACENTER.Viaje where viaj_mic_patente='" + nroPatente + "'";
-
-            //instanciamos obj de la clase connection y le enviamos la query para que la ejecute
             connection connect1 = new connection();
             DataTable cantViajes = connect1.execute_query(query1);
 
             //consulta a ejecutar para agregar nuevo registro por micro fuera de servicio (en EstadoMicro)
             string query2 = "INSERT INTO DATACENTER.EstadoMicro(est_mic_patente,est_fecha_fuera_serv,est_fecha_reingreso) VALUES ('"
                             + nroPatente + "','" + dateTimePickerFechaBajaTemporaria.Value.ToString("yyyy/MM/dd") + "','" + dateTimePickerFechaReingreso.Value.ToString("yyyy/MM/dd") + "') and";
-
-            //instanciamos obj de la clase connection y le enviamos la query para que la ejecute
             connection connect2 = new connection();
             connect2.execute_query(query2);
 

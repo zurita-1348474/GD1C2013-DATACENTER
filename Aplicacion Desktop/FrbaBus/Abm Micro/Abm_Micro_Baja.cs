@@ -58,7 +58,6 @@ namespace FrbaBus.Abm_Micro
                 return;
             }
 
-
             //Chequea si existen viajes ya asignados a ese micro
 
             //preparar patente para poder registrar nuevo micro
@@ -66,10 +65,8 @@ namespace FrbaBus.Abm_Micro
             string segundaPartePatente = textBoxPatente.Text.Substring(3, 3);
             string nroPatente = primerPartePatente + "-" + segundaPartePatente;
 
-            //consulta a ejecutar para saber si existen viajes asociados al micro
+            //consulta a ejecutar para saber si ya se había pautado una fecha anterior de baja definitiva
             string query3 = "SELECT mic_fecha_baja_def FROM DATACENTER.Micro where mic_patente='" + nroPatente + "'";
-
-            //instanciamos obj de la clase connection y le enviamos la query para que la ejecute
             connection connect3 = new connection();
             DataTable fechaBajaDefinitiva = connect3.execute_query(query3);
             
@@ -81,19 +78,13 @@ namespace FrbaBus.Abm_Micro
 
             //consulta a ejecutar para saber si existen viajes asociados al micro
             string query1 = "SELECT count(*) FROM DATACENTER.Viaje where viaj_mic_patente='" + nroPatente + "'";
-
-            //instanciamos obj de la clase connection y le enviamos la query para que la ejecute
             connection connect1 = new connection();
             DataTable cantViajes = connect1.execute_query(query1);
 
-
             //consulta a ejecutar para agregar nuevo registro por micro fuera de servicio (en EstadoMicro)
             string query2 = "UPDATE DATACENTER.Micro SET mic_fecha_baja_def='"+dateTimePickerFechaBajaDefinitiva.Value.ToString("yyyy/MM/dd")+"' where mic_patente='"+nroPatente+"'";
-
-            //instanciamos obj de la clase connection y le enviamos la query para que la ejecute
             connection connect2 = new connection();
             connect2.execute_query(query2);
-
             
             if (Convert.ToInt32(cantViajes.Rows[0].ItemArray[0].ToString()) == 0)
             {
@@ -108,9 +99,6 @@ namespace FrbaBus.Abm_Micro
                 form_OpPorConcretar.pasaPatente(nroPatente, dateTimePickerFechaBajaDefinitiva, null);
                 form_OpPorConcretar.ShowDialog();
             }
-
-
-
         }
     }
 }

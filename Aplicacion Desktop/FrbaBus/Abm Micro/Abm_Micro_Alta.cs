@@ -75,15 +75,11 @@ namespace FrbaBus.Abm_Micro
 
             //consulta a ejecutar para conseguir id de servicio para poder registrar nuevo micro
             string query1 = "SELECT serv_id FROM DATACENTER.Servicio where serv_tipo='"+comboBoxServicio.Text.ToString()+"'";
-
-            //instanciamos obj de la clase connection y le enviamos la query para que la ejecute
             connection connect1 = new connection();
             DataTable idServ = connect1.execute_query(query1);
 
             //consulta a ejecutar para conseguir id de marca para poder registrar nuevo micro
             string query2 = "SELECT marc_id FROM DATACENTER.Marca where marc_nombre='"+comboBoxMarca.Text.ToString()+"'";
-
-            //instanciamos obj de la clase connection y le enviamos la query para que la ejecute
             connection connect2 = new connection();
             DataTable idMarca = connect2.execute_query(query2);
 
@@ -95,8 +91,6 @@ namespace FrbaBus.Abm_Micro
             //consulta a ejecutar para registrar nuevo micro
             string query3 = "INSERT INTO DATACENTER.Micro(mic_patente, mic_marc_id, mic_serv_id, mic_cant_butacas, mic_cant_kg_disponibles, mic_modelo, mic_fecha_alta, mic_fecha_baja_def) VALUES ('"+
                             nroPatente + "','" + idMarca.Rows[0].ItemArray[0].ToString() + "','" + idServ.Rows[0].ItemArray[0].ToString() + "','" + textBoxCButacas.Text.ToString() + "','" + textBoxCKGDisp.Text.ToString() + "','" + textBoxModelo.Text.ToString() + "','" + dateTimePickerFechaAlta.Value.ToString("yyyy/MM/dd") + "',NULL)";
-
-            //instanciamos obj de la clase connection y le enviamos la query para que la ejecute
             connection connect3 = new connection();
             connect3.execute_query(query3);
 
@@ -157,7 +151,7 @@ namespace FrbaBus.Abm_Micro
 
         private void Abm_Micro_Alta_Load(object sender, EventArgs e)
         {
-            //consulta a ejecutar para mostrar todas los tipos de servicios existentes
+            //consulta a ejecutar para mostrar todas los tipos de servicios existentes en la BD
             string query1 = "SELECT serv_tipo FROM DATACENTER.Servicio";
             
             //instanciamos obj de la clase connection y le enviamos la query para que la ejecute
@@ -169,10 +163,8 @@ namespace FrbaBus.Abm_Micro
             comboBoxServicio.DisplayMember = "serv_tipo";
             comboBoxServicio.ValueMember = "serv_tipo";
 
-            //consulta a ejecutar para mostrar todas los tipos de marca existentes
+            //consulta a ejecutar para mostrar todas los tipos de marca existentes en la BD
             string query2 = "SELECT marc_nombre FROM DATACENTER.Marca";
-
-            //instanciamos obj de la clase connection y le enviamos la query para que la ejecute
             connection connect2 = new connection();
             DataTable tiposMarca = connect2.execute_query(query2);
 

@@ -78,8 +78,6 @@ namespace FrbaBus.Abm_Micro
             //consulta a ejecutar para registrar nuevo micro
             string query1 = "INSERT INTO DATACENTER.Micro(mic_patente, mic_marc_id, mic_serv_id, mic_cant_butacas, mic_cant_kg_disponibles, mic_modelo, mic_fecha_alta, mic_fecha_baja_def) VALUES ('" +
                             nroPatente + "','" + caractMicroNuevo.Rows[0].ItemArray[0].ToString() + "','" + caractMicroNuevo.Rows[0].ItemArray[1].ToString() + "','" + caractMicroNuevo.Rows[0].ItemArray[2].ToString() + "','" + caractMicroNuevo.Rows[0].ItemArray[3].ToString() + "','" + caractMicroNuevo.Rows[0].ItemArray[4].ToString() + "','" + DateTime.Now.ToString("yyyy/MM/dd") + "',NULL)";
-
-            //instanciamos obj de la clase connection y le enviamos la query para que la ejecute
             connection connect1 = new connection();
             connect1.execute_query(query1);
 
@@ -99,7 +97,6 @@ namespace FrbaBus.Abm_Micro
             {
                 query2 = "UPDATE DATACENTER.Viaje SET viaj_mic_patente='" + nroPatente + "' WHERE viaj_mic_patente='" + patenteAReemplazar + "' and ((viaj_fecha_salida>='" + fechaFServ.Value.ToString("yyy/MM/dd") + "' and viaj_fecha_salida<='" + fechaRein.Value.ToString("yyyy/MM/dd") + "') or (viaj_fecha_lleg_estimada>='" + fechaFServ.Value.ToString("yyyy/MM/dd") + "' and viaj_fecha_lleg_estimada<='" + fechaRein.Value.ToString("yyyy/MM/dd") + "'))";
             }
-            //instanciamos obj de la clase connection y le enviamos la query para que la ejecute
             connection connect2 = new connection();
             connect2.execute_query(query2);
 

@@ -31,8 +31,6 @@ namespace FrbaBus.Abm_Micro
         {
             //consulta a ejecutar para conocer las características del micro que se quiere dar de baja
             string query1 = "SELECT mic_marc_id, mic_serv_id, mic_cant_butacas, mic_cant_kg_disponibles, mic_modelo FROM DATACENTER.Micro where mic_patente='" + patenteConGuion +"'";
-
-            //instanciamos obj de la clase connection y le enviamos la query para que la ejecute
             connection connect1 = new connection();
             DataTable caracteristicasMicro = connect1.execute_query(query1);
 
@@ -40,8 +38,6 @@ namespace FrbaBus.Abm_Micro
             string query2 = "SELECT top 1 mic_patente FROM DATACENTER.Micro where mic_patente<>'" + patenteConGuion 
                             + "' and mic_marc_id="+caracteristicasMicro.Rows[0].ItemArray[0].ToString()+" and mic_serv_id="
                             +caracteristicasMicro.Rows[0].ItemArray[1].ToString()+" and mic_cant_butacas>="+caracteristicasMicro.Rows[0].ItemArray[2].ToString();
-
-            //instanciamos obj de la clase connection y le enviamos la query para que la ejecute
             connection connect2 = new connection();
             DataTable microReemplazante = connect2.execute_query(query2);
 
@@ -69,8 +65,6 @@ namespace FrbaBus.Abm_Micro
                 {
                     query3 = "UPDATE DATACENTER.Viaje SET viaj_mic_patente='" + microReemplazante.Rows[0].ItemArray[0].ToString() + "' WHERE viaj_mic_patente='" + patenteConGuion + "' and ((viaj_fecha_salida>='" + fechaFueraServ.Value.ToString("yyyy/MM/dd") + "' and viaj_fecha_salida<='" + fechaReing.Value.ToString("yyyy/MM/dd") + "') or (viaj_fecha_lleg_estimada>='" + fechaFueraServ.Value.ToString("yyyy/MM/dd") + "' and viaj_fecha_lleg_estimada<='" + fechaReing.Value.ToString("yyyy/MM/dd") + "'))";
                 }
-
-                //instanciamos obj de la clase connection y le enviamos la query para que la ejecute
                 connection connect3 = new connection();
                 connect3.execute_query(query3);
 
