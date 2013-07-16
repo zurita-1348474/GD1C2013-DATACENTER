@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using FrbaBus.Abm_Micro;
+using FrbaBus.Canc_Dev_de_Pas_Enc;
 
 namespace FrbaBus
 {
@@ -16,7 +16,7 @@ namespace FrbaBus
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Abm_Micro_Baja());           
+            Application.Run(new CancelDevol());  
         }
     }
 }

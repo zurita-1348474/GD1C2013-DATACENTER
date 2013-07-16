@@ -79,7 +79,12 @@ namespace FrbaBus.Abm_Micro
         private void buttonCancelar_Click(object sender, EventArgs e)
         {
 
+            //Hacer devoluciones por los viajes y encomiendas que tenían asignado el micro para la fecha en que se da de baja
 
+            //consulta a ejecutar para cancelar todos los viajes de ese micro en la fecha requerida
+            string query2 = "exec cancelaViajesXMicro '"+patenteConGuion+"','"+fechaFueraServ.Value.ToString("yyyy/MM/dd")+"','"+fechaReing.Value.ToString("yyyy/MM/dd")+"'";
+            connection connect2 = new connection();
+            connect2.execute_query(query2);
 
             MessageBox.Show("Los viajes se han cancelado con éxito.");
 

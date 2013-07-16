@@ -117,6 +117,12 @@
     <Compile Include="Abm Rol\Abm_Rol_Alta.Designer.cs">
       <DependentUpon>Abm_Rol_Alta.cs</DependentUpon>
     </Compile>
+    <Compile Include="Canc Dev de Pas Enc\Cancel_Devol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Canc Dev de Pas Enc\Cancel_Devol.Designer.cs">
+      <DependentUpon>Cancel_Devol.cs</DependentUpon>
+    </Compile>
     <Compile Include="Cancelar Viaje\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -193,6 +199,9 @@
     <EmbeddedResource Include="Abm Rol\Abm_Rol_Alta.resx">
       <DependentUpon>Abm_Rol_Alta.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Canc Dev de Pas Enc\Cancel_Devol.resx">
+      <DependentUpon>Cancel_Devol.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Canje de Ptos\CanjeDePuntos.resx">
       <DependentUpon>CanjeDePuntos.cs</DependentUpon>
     </EmbeddedResource>
@@ -217,6 +226,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

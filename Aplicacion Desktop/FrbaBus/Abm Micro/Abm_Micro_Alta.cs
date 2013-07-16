@@ -127,12 +127,11 @@ namespace FrbaBus.Abm_Micro
                     //el resto de teclas pulsadas se desactivan 
                     e.Handled = true;
                 } 
-
         }
 
         private void textBoxMarca_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //Para obligar a que sólo se introduzcan números 
+            //Para obligar a que sólo se introduzcan letras 
             if (Char.IsLetter(e.KeyChar))
             {
                 e.Handled = false;
