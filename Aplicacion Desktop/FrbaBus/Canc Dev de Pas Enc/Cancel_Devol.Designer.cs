@@ -40,12 +40,14 @@
             this.textBoxMotivoDeCanc = new System.Windows.Forms.TextBox();
             this.labelItemADevolver = new System.Windows.Forms.Label();
             this.comboBoxTipoItem = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.comboBoxAlcance = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // labelFechaCancDev
             // 
             this.labelFechaCancDev.AutoSize = true;
-            this.labelFechaCancDev.Location = new System.Drawing.Point(11, 38);
+            this.labelFechaCancDev.Location = new System.Drawing.Point(11, 28);
             this.labelFechaCancDev.Name = "labelFechaCancDev";
             this.labelFechaCancDev.Size = new System.Drawing.Size(176, 13);
             this.labelFechaCancDev.TabIndex = 0;
@@ -54,7 +56,7 @@
             // labelNroCompra
             // 
             this.labelNroCompra.AutoSize = true;
-            this.labelNroCompra.Location = new System.Drawing.Point(11, 78);
+            this.labelNroCompra.Location = new System.Drawing.Point(12, 56);
             this.labelNroCompra.Name = "labelNroCompra";
             this.labelNroCompra.Size = new System.Drawing.Size(81, 13);
             this.labelNroCompra.TabIndex = 1;
@@ -100,7 +102,7 @@
             // 
             // textBoxNroCompra
             // 
-            this.textBoxNroCompra.Location = new System.Drawing.Point(193, 75);
+            this.textBoxNroCompra.Location = new System.Drawing.Point(193, 53);
             this.textBoxNroCompra.Name = "textBoxNroCompra";
             this.textBoxNroCompra.Size = new System.Drawing.Size(121, 20);
             this.textBoxNroCompra.TabIndex = 15;
@@ -108,7 +110,7 @@
             // 
             // dateTimePickerCancDev
             // 
-            this.dateTimePickerCancDev.Location = new System.Drawing.Point(193, 38);
+            this.dateTimePickerCancDev.Location = new System.Drawing.Point(193, 24);
             this.dateTimePickerCancDev.Name = "dateTimePickerCancDev";
             this.dateTimePickerCancDev.Size = new System.Drawing.Size(200, 20);
             this.dateTimePickerCancDev.TabIndex = 16;
@@ -133,7 +135,7 @@
             // labelItemADevolver
             // 
             this.labelItemADevolver.AutoSize = true;
-            this.labelItemADevolver.Location = new System.Drawing.Point(11, 111);
+            this.labelItemADevolver.Location = new System.Drawing.Point(11, 115);
             this.labelItemADevolver.Name = "labelItemADevolver";
             this.labelItemADevolver.Size = new System.Drawing.Size(85, 13);
             this.labelItemADevolver.TabIndex = 20;
@@ -142,16 +144,38 @@
             // comboBoxTipoItem
             // 
             this.comboBoxTipoItem.FormattingEnabled = true;
-            this.comboBoxTipoItem.Location = new System.Drawing.Point(193, 106);
+            this.comboBoxTipoItem.Location = new System.Drawing.Point(193, 110);
             this.comboBoxTipoItem.Name = "comboBoxTipoItem";
             this.comboBoxTipoItem.Size = new System.Drawing.Size(121, 21);
             this.comboBoxTipoItem.TabIndex = 21;
+            this.comboBoxTipoItem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxTipoItem_KeyPress);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(10, 85);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(132, 13);
+            this.label1.TabIndex = 22;
+            this.label1.Text = "Alcance de la Devolución:";
+            // 
+            // comboBoxAlcance
+            // 
+            this.comboBoxAlcance.FormattingEnabled = true;
+            this.comboBoxAlcance.Location = new System.Drawing.Point(193, 80);
+            this.comboBoxAlcance.Name = "comboBoxAlcance";
+            this.comboBoxAlcance.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxAlcance.TabIndex = 23;
+            this.comboBoxAlcance.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxAlcance_KeyPress);
+            this.comboBoxAlcance.SelectedValueChanged += new System.EventHandler(this.comboBoxAlcance_SelectedValueChanged);
             // 
             // CancelDevol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(408, 326);
+            this.Controls.Add(this.comboBoxAlcance);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBoxTipoItem);
             this.Controls.Add(this.labelItemADevolver);
             this.Controls.Add(this.textBoxMotivoDeCanc);
@@ -186,5 +210,7 @@
         private System.Windows.Forms.TextBox textBoxMotivoDeCanc;
         private System.Windows.Forms.Label labelItemADevolver;
         private System.Windows.Forms.ComboBox comboBoxTipoItem;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox comboBoxAlcance;
     }
 }

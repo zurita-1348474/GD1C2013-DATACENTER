@@ -178,5 +178,15 @@ namespace FrbaBus.Abm_Micro
         {
             this.Close();
         }
+
+        private void comboBoxMarca_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void comboBoxServicio_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }
